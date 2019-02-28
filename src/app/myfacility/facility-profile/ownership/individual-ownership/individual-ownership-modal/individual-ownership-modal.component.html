@@ -1,0 +1,208 @@
+<form [formGroup]="individualOwnerForm">
+  <div style="display:flex;justify-content:space-between">
+    <h3 mat-dialog-title>{{(data!=undefined)?"Edit Ownership Information":"Enter Ownership Information"}}</h3>
+    <button mat-icon-button (click)="onClose()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <mat-dialog-content class="mat-dialog-content-indivOwner">
+    <table>
+      <tr>
+        <td>
+          <mat-form-field>
+            <mat-select placeholder="Prefix" formControlName="prefixTypeID">
+              <mat-option>--None--</mat-option>
+              <mat-option *ngFor="let prefix of prefixList" [value]="prefix.prefixTypeID">{{prefix.prefixTypeDescription}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput placeholder="First Name" required formControlName="firstName" [errorStateMatcher]="matcher">
+            <mat-error *ngIf="individualOwnerForm.get('firstName').hasError('required')">
+              First Name is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="individualOwnerForm.get('firstName').hasError('pattern')">
+              First Name is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput placeholder="Middle Name" formControlName="middleName">
+            <mat-error *ngIf="individualOwnerForm.get('middleName').hasError('pattern')">
+              Middle Name is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <input matInput placeholder="Last Name" required formControlName="lastName" [errorStateMatcher]="matcher">
+            <mat-error *ngIf="individualOwnerForm.get('lastName').hasError('required')">
+              Last Name is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="individualOwnerForm.get('lastName').hasError('pattern')">
+              Last Name is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <mat-select placeholder="Suffix" formControlName="suffixTypeID">
+              <mat-option>--None--</mat-option>
+              <mat-option *ngFor="let suffix of suffixList" [value]="suffix.suffixTypeID">{{suffix.suffixTypeDescription}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <mat-select placeholder="Familal Relationship to Other Owners" formControlName="relationshipId">
+              <mat-option>--None--</mat-option>
+              <mat-option *ngFor="let item of ownerRelationshipTypes" [value]="item.id"> {{item.text}} </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <input matInput placeholder="Title" formControlName="title" required [errorStateMatcher]="matcher">
+            <mat-error *ngIf="individualOwnerForm.get('title').hasError('required')">
+              Title is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput placeholder="NABP Individual e-Profile ID" formControlName="eprofileId">
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput type="number" min="5" max="100" maxlength="3" placeholder="Percent Owned" formControlName="percentOwned"
+              required [errorStateMatcher]="matcher">
+            <mat-error *ngIf="individualOwnerForm.get('percentOwned').hasError('required')">
+              Percent Owned is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="individualOwnerForm.get('percentOwned').hasError('max') || individualOwnerForm.get('percentOwned').hasError('min')">
+              Percent owned should be <strong>between 5 to 100 </strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <mat-select placeholder="Country" required formControlName="countryId" [errorStateMatcher]="matcher"
+              (selectionChange)="getStates($event.value)">
+              <mat-option *ngFor="let country of countryList;" [value]="country.countryId">{{country.countryName}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="individualOwnerForm.get('countryId').hasError('required')">
+              Country is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput placeholder="Address Line 1" required formControlName="address1" [errorStateMatcher]="matcher">
+            <mat-error *ngIf="individualOwnerForm.get('address1').hasError('required')">
+              Address Line 1 is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="individualOwnerForm.get('address1').hasError('pattern')">
+              Address Line 1 is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput placeholder="Address Line 2" formControlName="address2">
+            <mat-hint align="end">Optional</mat-hint>
+            <mat-error *ngIf=" individualOwnerForm.get('address2').hasError('pattern')">
+              Address Line 2 is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <input matInput placeholder="City" required formControlName="city" [errorStateMatcher]="matcher">
+            <mat-error *ngIf="individualOwnerForm.get('city').hasError('required')">
+              City is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf=" individualOwnerForm.get('city').hasError('pattern')">
+              City is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <mat-select placeholder="State" formControlName="stateId" [errorStateMatcher]="matcher" required>
+              <mat-option *ngFor="let state of statesList" [value]="state.stateId">{{state.stateName}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="individualOwnerForm.get('stateId').hasError('required')">
+              State is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput #zip placeholder="Zipcode" required formControlName="zipCode" [errorStateMatcher]="matcher">
+            <mat-hint align="end">{{zip.value?.length || 0}}/5</mat-hint>
+            <mat-error *ngIf="individualOwnerForm.get('zipCode').hasError('required')">
+              Zipcode is <strong>Required</strong>
+            </mat-error>
+            <mat-error *ngIf=" individualOwnerForm.get('zipCode').hasError('pattern')">
+              Zipcode is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        <td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <input matInput type="tel" placeholder="Primary Phone" required formControlName="primaryPhone"
+              [errorStateMatcher]="matcher">
+            <mat-error *ngIf="individualOwnerForm.get('primaryPhone').hasError('required')">
+              Primary Phone is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="individualOwnerForm.get('primaryPhone').hasError('pattern')">
+              Primary Phone is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field style="width:40%">
+            <input matInput placeholder="Ext" formControlName="primaryExtension">
+            <mat-error *ngIf=" individualOwnerForm.get('primaryExtension').hasError('pattern')">
+              Ext is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <div>&nbsp;</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="table-label">
+          Is Previous Owner?*
+        </td>
+        <td>
+          <mat-radio-group formControlName="isPreviousOwner" required class="rad-group">
+            <mat-radio-button class="rad-button" [value]=true>Yes</mat-radio-button>
+            <mat-radio-button class="rad-button" [value]=false>No</mat-radio-button>
+          </mat-radio-group>
+        </td>
+        <td>
+          <div>&nbsp;</div>
+        </td>
+      </tr>
+    </table>
+    <mat-dialog-actions class="flex-space-around">
+      <button mat-raised-button color="primary" (click)='onClear()'>Clear</button>
+      <button type="submit" [disabled]="!individualOwnerForm.valid" mat-raised-button color="primary" (click)="onSave()">{{(data!=undefined)?"Update":"Save"}}</button>
+    </mat-dialog-actions>
+  </mat-dialog-content>
+</form>

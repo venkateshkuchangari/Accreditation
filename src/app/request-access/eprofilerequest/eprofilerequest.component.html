@@ -1,0 +1,19 @@
+<mat-card class="mat-elevation-z4">
+  <div class="space-between" style="margin:10px">
+    <div class="tab-info-heading">
+      Create New e-Profile Request
+    </div>
+    <div>
+      <button mat-raised-button color="primary" (click)="createEprofileRequest()">Create</button>
+      <button style="margin-left: 10px" [disabled]="selectedData.length==0" mat-raised-button color="primary"
+        (click)="removeEprofileRequest()">Delete</button>
+    </div>
+  </div>
+  <hr>
+  <dynamic-grid paginationPageSize="10" [data]="rowData" [columnDefs]="columnDefs" rowSelection="single" (gridReadyEvent)="onEprofileGridReady($event)" (onSelection)="selectedEvent($event)"
+    showExportButton="noShow">
+  </dynamic-grid>
+  <div class="center-content" style="margin:10px">
+    <button mat-raised-button [disabled]="rowData.length==0" color="primary" (click)="submitEprofileRequests()">Submit</button>
+  </div>
+</mat-card>

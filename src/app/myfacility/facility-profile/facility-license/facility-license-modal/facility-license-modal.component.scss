@@ -1,0 +1,25 @@
+table{
+    width:100%;
+    tr{
+        width:100%;
+        td{
+           padding-left: 15px;
+            mat-form-field{
+            width:100%;
+            }
+        }
+    }
+  }
+  
+
+  
+  .rad-button{
+    padding-right: 15px;
+    margin: 10px;
+  }
+  
+  .rad-group{
+      display: flex;
+      justify-content: space-around
+  }
+  

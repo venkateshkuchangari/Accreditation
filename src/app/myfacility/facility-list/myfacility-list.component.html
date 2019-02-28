@@ -1,0 +1,38 @@
+<div *ngIf="dataFetched">
+  <div *ngIf="actionIdonRoutes!='_app_accr9'" class="header-div">
+    <mat-toolbar class="space-between mat-toolbar-level2">
+      <span style="cursor: pointer;" routerLink="/dashboard">
+        <mat-icon>reply</mat-icon>Dashboard
+      </span>
+      <span>My facilities</span>
+      <span style="width: 180px;">&nbsp;</span>
+    </mat-toolbar>
+  </div>
+  <mat-card class="mat-elevation-z4">
+    <div class="space-between" style="margin:10px">
+      <div class="tab-info-heading" *ngIf="rowData.length!=0">
+        {{(actionIdonRoutes=='_fac_accr4')? 'Please choose a facility to view its Details':'Please select Facilities
+        for
+        Application'}}
+      </div>
+      <div *ngIf="rowData.length==0" class="tab-info-heading" style="color: rgb(155, 22, 22)">
+        No facilities associated to this user. Click to request access to new
+        facility
+      </div>
+      <a *ngIf="access_request_e_profile" mat-raised-button color="primary" routerLink="/dashboard/request-access/make-request">
+        Request New Facility e-Profile
+      </a>
+    </div>
+    <hr>
+
+    <div>
+      <dynamic-grid *ngIf="rowData.length!=0" paginationPageSize="7" [data]="rowData" [columnDefs]="columnDefs"
+        rowSelection="{{rowSelectionOnRoute}}" showExportButton="{{showExportButton}}" (onSelection)="selectedEvent($event)">
+      </dynamic-grid>
+    </div>
+    <div *ngIf="rowData.length!=0" class="center-content" style="margin:10px">
+      <button *ngIf="actionIdonRoutes=='_app_accr9' && dataFetched==true" [disabled]="!enable_Next" mat-raised-button
+        color="primary" (click)="saveApplicationFacilities()">Next</button>
+    </div>
+  </mat-card>
+</div>

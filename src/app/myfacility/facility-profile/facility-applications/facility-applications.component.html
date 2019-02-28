@@ -1,0 +1,12 @@
+<div *ngIf="dataLoaded">
+  <dynamic-grid *ngIf="rowData.length!=0"
+  paginationPageSize="10"
+   [data]="rowData"
+    [columnDefs]="columnDefs"
+    rowSelection="single"
+    showExportButton="noShow">
+  </dynamic-grid>
+  <div *ngIf="rowData.length == 0">
+    <h3 style="color: rgb(155, 22, 22)">There are no applications for this facility</h3>
+</div>
+</div>

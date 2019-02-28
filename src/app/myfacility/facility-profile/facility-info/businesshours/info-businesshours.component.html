@@ -1,0 +1,111 @@
+<div *ngIf="businesshoursdataLoaded && schematicdataLoaded && storeFrontdataLoaded" class="outer-business">
+  <mat-card class="inner-card2 mat-elevation-z4 facility-level-card-size">
+    <div class="space-between" style="height:40px; margin: 10px;">
+      <div class="tab-info-heading">Business Hours<em *ngIf="isFileRequired"
+          class="is-required"><sup><small>(required)*</small></sup></em></div>
+      <button mat-raised-button color="primary"
+        (click)="openbusinessHoursDialog()">{{(businessHours.length!=0)?'Edit':'Add'}}</button>
+    </div>
+    <hr>
+    <div *ngIf="businessHours.length ==0">
+      <h4>Add Business Hours for this facility</h4>
+    </div>
+    <div *ngIf="businessHours.length !=0">
+      <table class="business-hours-table">
+        <tr>
+          <th>Day</th>
+          <th>Timings</th>
+        </tr>
+        <ng-container *ngFor="let day of businessHours">
+          <tr>
+            <td class="td1 table-label">{{day.dayOfTheWeek ||""}}</td>
+            <td>
+              <ng-container *ngIf="day.openAllDay">
+                Open 24 Hours
+              </ng-container>
+              <ng-container *ngIf="day.closedAllDay">
+                Closed
+              </ng-container>
+              <ng-container *ngIf="!day.closedAllDay&& !day.openAllDay">
+                {{convertTo12hrs(day.openingTime)||""}} to {{convertTo12hrs(day.closingTime)||""}}
+              </ng-container>
+            </td>
+          </tr>
+        </ng-container>
+      </table>
+    </div>
+  </mat-card>
+  <mat-card class="inner-card-image mat-elevation-z4 facility-level-card-size">
+    <div class="space-between" style="height:40px; margin: 10px;">
+      <div class="tab-info-heading"> Schematic Diagram<em *ngIf="isFileRequired"
+          class="is-required"><sup><small>(required)*</small></sup></em>
+      </div>
+    </div>
+    <hr />
+    <div>
+      <file-upload #schematic (filestoParent)="getFilesfromChild($event,1)" acceptFiles="image/*" [isMultiple]="false"
+        [documentTypeId]='schematicDocumentId'></file-upload>
+    </div>
+    <div class="responsive">
+      <div class="gallery" *ngIf="existingSchematicFileMetadatas.length!=0">
+        <img [src]="SchematicPreviewURL">
+      </div>
+      <div class="gallery1" *ngIf="existingSchematicFileMetadatas.length==0">       
+        <h3 class="no-record-text">
+          Please provide a schematic that contains labels identifying key areas of your entire pharmacy.
+        </h3>
+      </div>
+    </div>
+  </mat-card>
+  <mat-card class="inner-card-image mat-elevation-z4 facility-level-card-size">
+    <div class="space-between" style="height:40px; margin: 10px;">
+      <div class="tab-info-heading"> Store Front<em *ngIf="isFileRequired"
+          class="is-required"><sup><small>(required)*</small></sup></em>
+      </div>
+    </div>
+    <hr />
+    <div>
+      <file-upload #storefront (filestoParent)="getFilesfromChild($event,2)" acceptFiles="image/*" [isMultiple]="false"
+        [documentTypeId]='storeFrontDocumentId'></file-upload>
+    </div>
+    <div class="responsive">
+      <div class="gallery" *ngIf="existingStoreFileMetadatas.length!=0">
+        <img [src]="StorefrontPreviewURL">
+      </div>
+      <div class="gallery1" *ngIf="existingStoreFileMetadatas.length==0">
+        <h3 class="no-record-text">Upload a picture of your facility's Store Front. Select a file below and
+          then click the Up arrow to upload the document to your e-Profile or application.</h3>
+      </div>
+    </div>
+  </mat-card>
+  <mat-card *ngIf="actionIdonRoutes == '_rev_accr9'" class="inner-card-image mat-elevation-z4 facility-level-card-size">
+    <div class="space-between" style="height:40px; margin: 10px;">
+      <div class="tab-info-heading">Blackout Dates
+        <br><small>Count: {{balckOutDates.length}} | Max: 20</small>
+      </div>
+      <button *ngIf="!editMode" mat-raised-button color="primary"
+        (click)="editBlackOutDates()">{{(balckOutDates.length!=0)?'Edit':'Add'}}</button>
+      <button *ngIf="editMode" mat-raised-button color="primary" (click)="saveBlackOutDates()">Save</button>
+    </div>
+    <hr>
+    <div *ngIf="showPicker && balckOutDates.length<20 " class="space-between" style="height:40px;">
+      <input matInput readonly [matDatepicker]="frompicker" placeholder="Click to select blackout date"
+        (dateInput)="add($event)">
+      <mat-datepicker-toggle matTooltip="Click to open Calendar" matSuffix [for]="frompicker"></mat-datepicker-toggle>
+      <mat-datepicker #frompicker></mat-datepicker>
+    </div>
+    <ng-container *ngIf="balckOutDates.length != 0">
+      <mat-chip-list #chipList>
+        <mat-chip *ngFor="let date of balckOutDates" [selectable]="selectable" [removable]="removable"
+          (removed)="remove(date)">
+          {{date | date : 'MM/dd/yyyy'}}
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <mat-icon matSuffix matChipRemove matTooltip="Click to remove" *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+      </mat-chip-list>
+    </ng-container>
+    <div *ngIf="balckOutDates.length == 0">
+      <h3 class="no-record-text" >Please select the dates which your facility is unavailable for inspection for any reason</h3>
+    </div>
+  </mat-card>
+</div>

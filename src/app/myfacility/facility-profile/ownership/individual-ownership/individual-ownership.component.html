@@ -1,0 +1,23 @@
+<div *ngIf="dataLoaded" class="outer">
+  <mat-card class="mat-elevation-z4 facility-level-card-size">
+    <div class="space-between" style="margin:10px">
+      <div class="tab-info-heading">
+        Indiviual Owners
+      </div>
+      <div>
+        <button mat-raised-button color="primary" (click)="addIndividualOwnership()">Add</button>
+        <button mat-raised-button color="primary" [disabled]="selectedIndividualRow.length == 0" (click)="editIndividualOwnership()">Edit</button>
+        <button mat-raised-button color="primary" [disabled]="selectedIndividualRow.length == 0" (click)="deleteIndividualOwnerShip()">Delete</button>
+      </div>
+    </div>
+    <hr>
+    <div *ngIf="individualRowData.length == 0">
+      <h3 style="color: rgb(155, 22, 22)">Please add Individual Owners for your Facility</h3>
+    </div>
+    <div *ngIf="individualRowData.length != 0">
+      <dynamic-grid [data]="individualRowData" [columnDefs]="columnDefs" paginationPageSize="7" (onSelection)="selectIndividualEvent($event)"
+        showExportButton="noShow" (gridReadyEvent)="onIndividualGridReady($event)">
+      </dynamic-grid>
+    </div>
+  </mat-card>
+</div>

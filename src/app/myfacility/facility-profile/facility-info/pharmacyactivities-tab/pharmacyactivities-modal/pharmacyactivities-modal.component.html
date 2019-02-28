@@ -1,0 +1,31 @@
+<form [formGroup]="activityForm">
+  <div style="display:flex;justify-content:space-between">
+    <h3 mat-dialog-title>Add/Remove Activities</h3>
+    <button mat-icon-button (click)="onClose()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <mat-dialog-content class="mat-dialog-content-pharmTab">
+    <mat-selection-list formControlName="selecetdActivities">
+      <mat-list-option style="width:280px;padding:15px;height:30px;margin:2px;display: inline-block" *ngFor="let activity of pharmacyActivityLookup"
+        [value]="activity.id">{{activity.text}}</mat-list-option>
+    </mat-selection-list>
+    <br>
+    <table style="width:100%; padding-left:30px;padding-right:30px">
+      <tr>
+        <td class="table-label" style="width:15%">
+          If Other Please Specify:
+        </td>
+        <td>
+          <chiplistinput #otherTypeInput [inputChips]="otherSelectedActivities" placeHolder="Other Type Descriptions"
+            (valuestoParent)="getvaluesfromChild($event)"></chiplistinput>
+        </td>
+      </tr>
+    </table>
+  </mat-dialog-content>
+  <mat-dialog-actions class="flex-space-around">
+    <button mat-raised-button color="primary" (click)='onClear()'>Clear</button>
+    <button [disabled]="!(activityForm.get('selecetdActivities').valid ||activityForm.get('otherActivities').valid)"
+      type="submit" mat-raised-button color="primary" (click)="onSave()">Save</button>
+  </mat-dialog-actions>
+</form>

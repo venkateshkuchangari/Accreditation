@@ -1,0 +1,68 @@
+<form [formGroup]="inspectionForm">
+  <div style="display:flex;justify-content:space-between">
+    <h3 mat-dialog-title>Enter Inspection History</h3>
+    <button mat-icon-button (click)="onClose()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <mat-dialog-content class="mat-dialog-content-inspection">
+    <table>
+      <tr>
+        <td>
+          <mat-form-field>
+            <mat-select placeholder="Type Of Inspection" required formControlName="agencyId" [errorStateMatcher]="matcher"
+              (selectionChange)="selectedAgency($event.value)" [errorStateMatcher]="matcher">
+              <mat-option *ngFor="let inspection  of inspectionList" [value]="inspection.id">{{inspection.text}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="inspectionForm.get('agencyId').hasError('required')">
+              Type Of Inspection is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field *ngIf="showAgencyName">
+            <input matInput placeholder="Agency Name" required formControlName="agencyName" [errorStateMatcher]="matcher">
+            <mat-error *ngIf="inspectionForm.get('agencyName').hasError('required')">
+              Agency Name is <strong>Required</strong>
+            </mat-error>
+            <mat-error *ngIf="inspectionForm.get('agencyName').hasError('pattern')">
+              Agency Name is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <input readonly matInput [matDatepicker]="picker" [max]="maxDate" [min]="minDate" placeholder="Inspection Date"
+              required formControlName="inspectionDate" [errorStateMatcher]="matcher">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="inspectionForm.get('inspectionDate').hasError('required')">
+              Inspection Date is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          &nbsp;
+        </td>
+      </tr>
+    </table>
+    <file-upload (filestoParent)="getFilesfromChild($event)" [isMultiple]="true" [isRequired]="true" [documentTypeId]='documentTypeId'
+      [filesExisting]="existingFileMetadatas"></file-upload>
+    <hr>
+    <p class="user-info-text">
+      * Please note: NABP cannot accept information that has Protected Health Information (PHI) or Personally
+      Identifiable
+      Information (PII). NABP asks that you please provide all documentation with all PHI & PII (including but not
+      limited
+      to patient names, prescription numbers, social security numbers, etc) be removed/de-identified before you send in
+      your response.
+    </p>
+    <mat-dialog-actions class="flex-space-around">
+      <button mat-raised-button color="primary" (click)='onClear()'>Clear</button>
+      <button type="submit" [disabled]="!inspectionForm.valid" mat-raised-button color="primary" (click)="onSave()">Save</button>
+    </mat-dialog-actions>
+  </mat-dialog-content>
+</form>

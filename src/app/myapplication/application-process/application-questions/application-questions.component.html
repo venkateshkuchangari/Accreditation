@@ -1,0 +1,29 @@
+<div [@.disabled]="true">
+<mat-tab-group [selectedIndex]="tabIndexNumber"> 
+  <mat-tab label="General" [disabled]=true>
+    <ng-template matTabContent>
+      <app-questions-general></app-questions-general>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="Supply Chain" [disabled]=true>
+    <ng-template matTabContent>
+      <app-questions-supply-chain></app-questions-supply-chain>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="eCommerce" [disabled]=true>
+    <ng-template matTabContent>
+      <app-questions-ecommerce></app-questions-ecommerce>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="Nuclear Pharmacy" [disabled]=true>
+    <ng-template matTabContent>
+      <app-questions-nuclear-pharmacy></app-questions-nuclear-pharmacy>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="Compounding" [disabled]=true>
+    <ng-template matTabContent>
+      <app-questions-compounding></app-questions-compounding>
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>
+</div>

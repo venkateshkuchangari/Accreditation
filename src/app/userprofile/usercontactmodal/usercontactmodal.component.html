@@ -1,0 +1,165 @@
+<form [formGroup]="contactForm">
+  <div style="display:flex;justify-content:space-between">
+    <h3 mat-dialog-title> Update Contact Information </h3>
+    <button mat-icon-button (click)="onClose()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <mat-dialog-content class="mat-dialog-content-usercontact">
+    <table>
+      <tr>
+        <td>
+          <mat-form-field>
+            <mat-select placeholder="Prefix" formControlName="PrefixTypeID">
+              <mat-option>--None--</mat-option>
+              <mat-option *ngFor="let prefix of prefixList" [value]="prefix.prefixTypeID">{{prefix.prefixTypeDescription}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field *ngIf="!data.genderTypeId">
+            <mat-select placeholder="Gender" formControlName="genderTypeId" required>
+              <mat-option *ngFor="let gender of genderList" [value]="gender.id">{{gender.text}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="contactForm.get('genderTypeId').hasError('required')">
+              Gender is
+              <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <mat-select placeholder="Country" required formControlName="CountryId" [errorStateMatcher]="matcher"
+              (selectionChange)="getStates($event.value)">
+              <mat-option *ngFor="let country of countryList;" [value]="country.countryId">{{country.countryName}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="contactForm.get('CountryId').hasError('required')">
+              Country is
+              <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput placeholder="Address Line 1" required formControlName="Address1" [errorStateMatcher]="matcher">
+            <mat-error *ngIf="contactForm.get('Address1').hasError('required')">
+              Address Line 1 is
+              <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="contactForm.get('Address1').hasError('pattern')">
+              Address Line 1 is
+              <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput placeholder="Address Line 2" formControlName="Address2">
+            <mat-hint align="end">Optional</mat-hint>
+            <mat-error *ngIf="contactForm.get('Address2').hasError('pattern')">
+              Address Line 2 is
+              <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <input matInput placeholder="City" required formControlName="City" [errorStateMatcher]="matcher">
+            <mat-error *ngIf="contactForm.get('City').hasError('required')">
+              City is
+              <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf=" contactForm.get('City').hasError('pattern')">
+              City is
+              <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+
+        </td>
+        <td>
+          <mat-form-field>
+            <mat-select placeholder="State" formControlName="StateId" [errorStateMatcher]="matcher" required>
+              <mat-option *ngFor="let state of statesList" [value]="state.stateId">{{state.stateName}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="contactForm.get('StateId').hasError('required')">
+              State is
+              <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput #zip placeholder="Zipcode" required formControlName="ZipCode" [errorStateMatcher]="matcher">
+            <mat-hint align="end">{{zip.value?.length || 0}}/5</mat-hint>
+            <mat-error *ngIf="contactForm.get('ZipCode').hasError('required')">
+              Zipcode is
+              <strong>Required</strong>
+            </mat-error>
+            <mat-error *ngIf=" contactForm.get('ZipCode').hasError('pattern')">
+              Zipcode is
+              <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <input matInput type="tel" placeholder="Primary Phone" required formControlName="PrimaryPhone"
+              [errorStateMatcher]="matcher">
+            <mat-error *ngIf="contactForm.get('PrimaryPhone').hasError('required')">
+              Primary Phone is
+              <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="contactForm.get('PrimaryPhone').hasError('pattern')">
+              Primary Phone is
+              <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field style="width:40%">
+            <input matInput placeholder="Ext" formControlName="PrimaryExtension">
+            <mat-error *ngIf="contactForm.get('PrimaryExtension').hasError('pattern')">
+              Ext is
+              <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <input matInput type="tel" placeholder="Secondary Phone" formControlName="SecondaryPhone">
+            <mat-error *ngIf="contactForm.get('SecondaryPhone').hasError('pattern')">
+              Secondary Phone is
+              <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field style="width:40%">
+            <input matInput placeholder="Ext" formControlName="SecondaryExtension">
+            <mat-error *ngIf="contactForm.get('SecondaryExtension').hasError('pattern')">
+              Ext is
+              <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <div>&nbsp;</div>
+        </td>
+      </tr>
+    </table>
+    <mat-dialog-actions class="flex-space-around">
+      <button mat-raised-button color="primary" (click)='onClear()'>Clear</button>
+      <button type="submit" [disabled]="!contactForm.valid" mat-raised-button color="primary" (click)="onUpdate()">
+        Update </button>
+    </mat-dialog-actions>
+  </mat-dialog-content>
+</form>

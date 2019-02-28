@@ -1,0 +1,8 @@
+<!-- <p>
+  questions-compounding works!
+</p> -->
+<dynamic-form 
+*ngIf="compoundingQuestions.length!=0"
+[inputQuestions]="compoundingQuestions"
+(answersToParent)="answerFromChild($event)"
+></dynamic-form>

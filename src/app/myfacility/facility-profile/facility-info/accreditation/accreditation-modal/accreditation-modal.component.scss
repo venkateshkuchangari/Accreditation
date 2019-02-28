@@ -1,0 +1,29 @@
+.space-between {
+    display: flex;
+   justify-content: space-between;
+   background-color: transparent;
+   margin-top: 10px;
+  
+}
+.rad-button{
+  padding-right: 15px;
+  margin: 10px;
+}
+
+.rad-group{
+    display: flex;
+    justify-content: space-around
+}
+table{
+  width:100%;
+  tr{
+      width:100%;
+      td{
+          padding-left: 15px;
+          mat-form-field{
+          width:100%;
+          }
+      }
+  }
+}
+

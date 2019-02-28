@@ -1,0 +1,31 @@
+<input type="file" #file style="display: none" [accept]="acceptFiles" (change)="onFilesAdded()" [multiple]="isMultiple">
+  <div class="flex-space-around">
+    <div class="table-label file-text">Select document & click upload <em *ngIf="isRequired" class="is-required"><sup><small>(required)*</small></sup></em></div>
+    <button mat-raised-button color="primary" (click)="addFiles()">
+      Add File(s)
+    </button>
+  </div>
+  <div class="file-content" [ngStyle]="{'height.px':(fileList.length + filesFromParent.length)*60}" *ngIf="fileList.length!=0  ||filesFromParent.length!=0">
+    <mat-list>
+      <ng-container>
+        <mat-list-item *ngFor="let file of filesFromParent;let existIndex=index">
+            <h4 mat-line>{{file.fileName}}</h4> 
+            <span><mat-icon>attachment</mat-icon></span>
+            <span><button mat-icon-button (click)="downloadExistingFile(existIndex)"><mat-icon>get_app</mat-icon></button></span>
+            <span>   <button mat-icon-button (click)="removeExistingFile(existIndex)">
+              <mat-icon> close </mat-icon>
+            </button></span>
+        </mat-list-item>
+      </ng-container>
+      <mat-list-item *ngFor="let file of fileList;let i=index">
+        <h4 mat-line>{{file.name}}</h4>
+        <mat-progress-bar mode="determinate" [value]="progress[i]"></mat-progress-bar>
+         <button mat-icon-button (click)="removeFile(i)">
+          <mat-icon> close </mat-icon>
+        </button>
+        <button *ngIf="progress[i]!=100" mat-icon-button (click)="getFileUploadUrl(i)">
+          <mat-icon matTooltip={{uploadIconMsg}}> publish </mat-icon>
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </div>

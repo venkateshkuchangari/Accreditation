@@ -1,0 +1,36 @@
+
+.mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 500
+}
+
+mat-expansion-panel {
+    margin: 5px;
+    background-color:#f1f3f4;
+    max-width: 65%;
+    padding: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.application-card{
+  margin-top: 2px;
+  overflow: auto;
+  
+}
+.space-end {
+    display: flex;
+   justify-content: flex-end;
+   background-color: transparent;
+}
+
+.space-between {
+    display: flex;
+   justify-content: space-between;
+}
+
+td{
+    padding-right:5px
+}

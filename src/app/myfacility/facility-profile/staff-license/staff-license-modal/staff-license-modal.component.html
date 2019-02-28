@@ -1,0 +1,91 @@
+<div style="display:flex; justify-content: space-between;">
+  <h3 mat-dialog-title>Search Staff License Information</h3>
+  <button mat-icon-button (click)="onClose()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<form [formGroup]="individualForm">
+  <mat-dialog-content [ngClass]="(searchLicence.length>0)?'mat-dialog-content-staffLic-exp' : 'mat-dialog-content-staffLic'">
+    <table>
+      <tr>
+        <td>
+          <mat-form-field>
+            <mat-select placeholder="License State/Agency" formControlName="licensingAgencyId" required
+              (selectionChange)="getSelectedLicenseTypes($event.value)" [errorStateMatcher]="matcher">
+              <mat-option *ngFor="let agency of agencyTypes" [value]="agency.id">{{agency.text}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="individualForm.get('licensingAgencyId').hasError('required')">
+              License State/Agency is
+              <strong>Required</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <mat-select placeholder="License Type" formControlName="licenseTypeID" (selectionChange)="getStafflicenseNumberRegex($event.value)"
+              required [errorStateMatcher]="matcher">
+              <mat-option *ngFor="let item of licenseTypes" [value]="item.id">
+                {{item.text}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="individualForm.get('licenseTypeID').hasError('required')">
+              License Type is
+              <strong>Required</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <input matInput placeholder="License Number" formControlName="licenseNumber" required [errorStateMatcher]="matcher">
+            <mat-hint align="end">{{licenseFormatMessage||""}}</mat-hint>
+            <mat-error *ngIf="individualForm.get('licenseNumber').hasError('required')">
+              License Number is
+              <strong>Required</strong>
+            </mat-error>
+            <mat-error *ngIf="individualForm.get('licenseNumber').hasError('pattern')">
+              License Number is
+              <strong>Incorrect. {{licenseFormatMessage || ""}}</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput #pid placeholder="NABP E-Profile ID Number" required formControlName="eProfileId"
+              [errorStateMatcher]="matcher">
+            <mat-hint align="end">{{pid.value?.length || 0}}/7</mat-hint>
+            <mat-error *ngIf="individualForm.get('eProfileId').hasError('required')">
+              eProfileNumber is
+              <strong>Required</strong>
+            </mat-error>
+            <mat-error *ngIf="individualForm.get('eProfileId').hasError('pattern')">
+              eProfileNumber is
+              <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+    </table>
+    <div class="is-required" *ngIf="searchLicence.length == 0 && datafetched">
+      <em>Record not found please try again with different Values</em>
+    </div>
+    <mat-dialog-actions class="flex-space-around">
+      <button mat-raised-button color="primary" [disabled]="!individualForm.valid || searchLicence.length!=0" (click)="searchIndividualData()">Search</button>
+    </mat-dialog-actions>
+    <div *ngIf="searchLicence.length > 0">
+      <br>
+      <dynamic-grid *ngIf="searchLicence.length > 0" [data]="searchLicence" [columnDefs]="columnDefs" showExportButton="noShow"
+        paginationPageSize="7"></dynamic-grid>
+    </div>
+    <div *ngIf="searchLicence.length > 0" style="white-space: normal; padding-left: 15px;">
+      <mat-checkbox (change)="enableSubmit($event)"><span style="white-space: normal !important;">{{confirmMsg}}</span></mat-checkbox>
+    </div>
+    <br />
+    <div *ngIf="searchLicence.length > 0" class="flex-space-around">
+      <button mat-raised-button color="primary" (click)="onClear()">Clear</button>
+      <button mat-raised-button color="primary" *ngIf="searchLicence.length > 0" [disabled]="!allowSubmit" (click)="submit()">Submit</button>
+    </div>
+    <br />
+  </mat-dialog-content>
+</form>

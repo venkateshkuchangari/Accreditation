@@ -1,0 +1,22 @@
+<div *ngIf="dataLoaded" class="outer">
+  <mat-card class="mat-elevation-z4 facility-level-card-size">
+    <div class="space-between" style="margin:10px">
+      <div class="tab-info-heading">
+        Company Owners
+      </div>
+      <div>
+        <button mat-raised-button color="primary" (click)="addCompanyOwnership()">Add</button>
+        <button mat-raised-button color="primary" [disabled]="selectedCompanyRow.length == 0" (click)="editCompanyOwnership()">Edit</button>
+        <button mat-raised-button color="primary" [disabled]="selectedCompanyRow.length == 0" (click)="deleteCompanyOwnerShip()">Delete</button>
+      </div>
+    </div>
+    <hr>
+    <div *ngIf="companyRowData.length == 0">
+      <h3 style="color: rgb(155, 22, 22)">Please add Company Owners for your Facility</h3>
+    </div>
+    <div *ngIf="companyRowData.length != 0">
+      <dynamic-grid [data]="companyRowData" [columnDefs]="companyColumndefs" paginationPageSize="7" (onSelection)="selectCompanyEvent($event)"
+        showExportButton="noShow" (gridReadyEvent)="onCompanyGridReady($event)"></dynamic-grid>
+    </div>
+  </mat-card>
+</div>

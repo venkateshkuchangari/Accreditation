@@ -1,0 +1,72 @@
+<mat-toolbar class="space-between mat-toolbar-level2">
+  <span style="cursor: pointer;" routerLink="/dashboard">
+    <mat-icon>reply</mat-icon>Dashboard
+  </span>
+  <span>
+    User Details
+  </span>
+  <span style="width: 180px;">e-Profile ID:{{userContact?.eprofileId}}</span>
+</mat-toolbar>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div *ngIf="dataFetched">
+  <div *ngIf="userContact != undefined">
+    <mat-card class="style123">
+      <div class="space-between" style="margin:10px">
+        <div class="tab-info-heading">
+          {{userContact?.prefixTypeDescription||""}} {{userContact?.firstName||"" | uppercase}}
+          {{userContact?.middleName||"" | uppercase}} {{userContact?.lastName||"" | uppercase}}
+          {{userContact?.suffixTypeDescription||""}}
+        </div>
+        <button mat-raised-button color="primary" (click)='editContactDetails()'>Edit</button>
+      </div>
+      <hr>
+      <mat-card-content style="min-height:185px">
+        <table class="details-table">
+          <tr>
+            <td class="td1 table-label"> Gender : </td>
+            <td class="td2"> {{userContact?.genderTypeDescription||""}} </td>
+            <td class="td1 table-label"> &nbsp;</td>
+            <td class="td2"> &nbsp; </td>
+          </tr>
+
+          <tr>
+            <td class="td1 table-label"> Address Line1 : </td>
+            <td class="td2"> {{userContact?.address1||""}} </td>
+            <td class="td1 table-label"> Address Line2 : </td>
+            <td class="td2"> {{userContact?.address2||""}} </td>
+          </tr>
+          <tr>
+            <td class="td1 table-label"> City : </td>
+            <td class="td2"> {{userContact?.city||""}} </td>
+            <td class="td1 table-label"> State Name : </td>
+            <td class="td2"> {{userContact?.stateName||""}}</td>
+          </tr>
+          <tr>
+            <td class="td1 table-label"> Country Name : </td>
+            <td class="td2"> {{userContact?.countryName||""}} </td>
+            <td class="td1 table-label"> ZipCode : </td>
+            <td class="td2"> {{userContact?.zipCode||""}} </td>
+          </tr>
+          <tr>
+            <td class="td1 table-label"> Primary Phone: </td>
+            <td class="td2"> {{userContact?.primaryPhone||"" |phonenumber}} </td>
+            <td class="td1 table-label"> Primary Ext : </td>
+            <td class="td2"> {{userContact?.primaryExtension||""}} </td>
+          </tr>
+          <tr>
+            <td class="td1 table-label"> Secondary Phone: </td>
+            <td class="td2"> {{userContact?.secondaryPhone||"" |phonenumber}} </td>
+            <td class="td1 table-label"> Secondary Ext : </td>
+            <td class="td2"> {{userContact?.secondaryExtension||""}} </td>
+          </tr>
+        </table>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div *ngIf="userContact == undefined" style="color: red;">
+    No contact to show
+  </div>
+</div>

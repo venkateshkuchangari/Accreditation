@@ -1,0 +1,16 @@
+.space-between {
+    display: flex;
+   justify-content: space-between;
+}
+.outer-table{
+    width: 100%;
+    .outer-table-td{
+        border-bottom: 2px solid #f1f3f4;
+        width:50%;
+        padding: 5px;
+    }
+}
+
+.mat-dialog-content-application{
+padding: 0px 35px 35px 35px;
+}

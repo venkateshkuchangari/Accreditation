@@ -1,0 +1,220 @@
+<form [formGroup]="eprofileForm">
+  <div style="display:flex;justify-content:space-between">
+    <h3 mat-dialog-title>Enter Facility Information</h3>
+    <a mat-icon-button (click)="onClose()">
+      <mat-icon>close</mat-icon>
+    </a>
+  </div>
+  <mat-dialog-content class="mat-dialog-content-eprofile">
+    <table>
+      <tr>
+        <td>
+          <mat-form-field>
+            <input matInput formControlName="legalBusinessName" placeholder="Legal Business Name" required
+              [errorStateMatcher]="matcher">
+            <mat-error *ngIf="eprofileForm.get('legalBusinessName').hasError('required')">
+              Legal business Name is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf=" eprofileForm.get('legalBusinessName').hasError('pattern')">
+              Legal business Name is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput formControlName="primaryDBA" placeholder="Primary DBA" required [errorStateMatcher]="matcher">
+            <mat-error *ngIf="eprofileForm.get('primaryDBA').hasError('required')">
+              Primary DBA is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf=" eprofileForm.get('primaryDBA').hasError('pattern')">
+              Primary DBA is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <chiplistinput [inputChips]="inputChips" placeHolder="Other DBAs" (valuestoParent)=getDbaValuesfromChild($event)></chiplistinput>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <input matInput formControlName="eProfileID" placeholder="Facility e-Profile Id">
+            <mat-hint align="end">Facility e-Profile Id must be 3 to 7 digits</mat-hint>
+            <mat-error *ngIf=" eprofileForm.get('eProfileID').hasError('pattern')">
+              Facility e-Profile Id is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput formControlName="storeNumber" placeholder="Store Number">
+            <mat-error *ngIf=" eprofileForm.get('storeNumber').hasError('pattern')">
+              Store Number is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+
+        </td>
+
+        <td>
+          <mat-form-field>
+            <input matInput formControlName="npiNumber" placeholder="NPI Number">
+            <mat-hint align="end">
+              NPI number should be 10 digits.
+            </mat-hint>
+            <mat-error *ngIf="eprofileForm.get('npiNumber').hasError('pattern')">
+              NPI number should be <strong>10 digits.</strong>
+            </mat-error>
+            <mat-error *ngIf="eprofileForm.get('npiNumber').hasError('required')">
+              NPI number is <strong>Required</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <input matInput formControlName="feinNumber" placeholder="FEIN Number">
+            <mat-hint align="end">
+              FEIN number should be 9 digits.
+            </mat-hint>
+            <mat-error *ngIf="eprofileForm.get('feinNumber').hasError('pattern')">
+              FEIN number should be <strong>9 digits.</strong>
+            </mat-error>
+            <mat-error *ngIf="eprofileForm.get('feinNumber').hasError('required')">
+              FEIN number is <strong>Required</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput formControlName="ncpdpNumber" placeholder="NCPDP Number">
+            <mat-hint align="end">
+              NCPDP number should be 7 digits.
+            </mat-hint>
+            <mat-error *ngIf="eprofileForm.get('ncpdpNumber').hasError('pattern')">
+              NCPDP number should be <strong>7 digits.</strong>
+            </mat-error>
+            <mat-error *ngIf="eprofileForm.get('ncpdpNumber').hasError('required')">
+              NCPDP number is <strong>Required</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+
+        <td>
+          <mat-form-field>
+            <mat-select matInput formControlName="residentLicenseStateName" placeholder="License State">
+              <mat-option>--None--</mat-option>
+              <mat-optgroup *ngFor="let group of licenseCountries" [label]="group.countryName">
+                <mat-option *ngFor="let state of group.states" [value]="state.stateName">
+                  {{state.stateName}}
+                </mat-option>
+              </mat-optgroup>
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <input matInput formControlName="licenseNumber" placeholder="License Number">
+            <mat-error *ngIf=" eprofileForm.get('licenseNumber').hasError('pattern')">
+              License Number is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <mat-select placeholder="Country" required formControlName="countryID" (selectionChange)="getStates($event.value)"
+              [errorStateMatcher]="matcher">
+              <mat-option *ngFor="let country of countryList;" [value]="country.countryId">{{country.countryName}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="eprofileForm.get('countryID').hasError('required')">
+              Country is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput placeholder="Address Line 1" required formControlName="organizationAddress1"
+              [errorStateMatcher]="matcher">
+            <mat-error *ngIf="eprofileForm.get('organizationAddress1').hasError('required')">
+              Address Line 1 is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="eprofileForm.get('organizationAddress1').hasError('pattern')">
+              Address Line 1 is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <input matInput placeholder="Address Line 2" formControlName="organizationAddress2">
+            <mat-hint align="end">Optional</mat-hint>
+            <mat-error *ngIf=" eprofileForm.get('organizationAddress2').hasError('pattern')">
+              Address Line 2 is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput placeholder="City" required formControlName="organizationCity">
+            <mat-error *ngIf="eprofileForm.get('organizationCity').hasError('required')">
+              City is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf=" eprofileForm.get('organizationCity').hasError('pattern')">
+              City is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <mat-select placeholder="State" formControlName="organizationState" required>
+              <mat-option *ngFor="let state of statesList" [value]="state.stateName">{{state.stateName}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="eprofileForm.get('organizationState').hasError('required')">
+              State is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <input matInput #zip placeholder="Zipcode" formControlName="organizationZip" required>
+            <mat-hint align="end">{{zip.value?.length || 0}}/5</mat-hint>
+            <mat-error *ngIf="eprofileForm.get('organizationZip').hasError('required')">
+              Zipcode is <strong>Required</strong>
+            </mat-error>
+            <mat-error *ngIf=" eprofileForm.get('organizationZip').hasError('pattern')">
+              Zipcode is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput type="tel" formControlName="phoneNumber" placeholder="Primary Phone" required>
+            <mat-error *ngIf="eprofileForm.get('phoneNumber').hasError('required')">
+              Primary Phone is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="eprofileForm.get('phoneNumber').hasError('pattern')">
+              Primary Phone is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field style="width:40%">
+            <input matInput placeholder="Ext" formControlName="primaryExtension">
+            <mat-error *ngIf="eprofileForm.get('primaryExtension').hasError('pattern')">
+              Ext is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+    </table>
+    <mat-dialog-actions class="flex-space-around">
+      <button mat-raised-button color="primary" (click)='onClear()'>Clear</button>
+      <button type="submit" [disabled]="!eprofileForm.valid" cdkFocusInitial mat-raised-button color="primary" (click)="onSave()">Save</button>
+    </mat-dialog-actions>
+  </mat-dialog-content>
+</form>

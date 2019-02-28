@@ -1,0 +1,52 @@
+<div>
+  <h4>{{msg}}</h4>
+  <hr>
+  <div>
+      <em class="is-required" style="padding-right: 50px;display:flex; justify-content: flex-end;"> * Required </em>
+  <form *ngIf="formGroupCreated" [formGroup]="form">
+    <table style="width: 90%;">
+      <tbody *ngFor="let question of objectProps;let i = index;">
+        <div formGroupName={{question.key}}>
+          <tr>         
+            <td style="padding-left:20px; width:60%;"  class="table-label">
+              {{question.questionText}}<span  class="is-required">*</span>
+            </td>
+            <td style="width: 25%;">
+              <mat-radio-group formControlName="disciplinaryResponse">
+                <mat-radio-button *ngFor="let option of actionExistRadioGroup" [value]="option.id" (change)="radioChange($event.value,i)">
+                  {{option.text}} &nbsp;
+                </mat-radio-button>
+              </mat-radio-group>
+            </td>
+          </tr>
+          <tr *ngIf="showLists[i]">
+            <td style="padding-left:35px;">
+              <p  class="table-label">i) Who or what was disciplined?<span  class="is-required">*</span></p>
+            </td>
+            <td style="width: 25%;">
+              <mat-form-field appearance="outline">
+                  <mat-label>Discipline Entity</mat-label>
+                <mat-select placeholder="Discipline Entity" formControlName="daEntity" required [errorStateMatcher]="matcher">
+                  <mat-option *ngFor="let item of disciplineEntityList" [value]="item.id">{{item.text}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr *ngIf="showLists[i]">
+            <td style="padding-left:35px;">
+              <p  class="table-label">ii) By what state?<span  class="is-required">*</span></p>
+            </td>
+            <td style="width: 25%;">
+              <mat-form-field appearance="outline">
+                  <mat-label>Disciplined State</mat-label>
+                <mat-select placeholder="Disciplined State" formControlName="stateId" required [errorStateMatcher]="matcher">
+                  <mat-option *ngFor="let state of statesList" [value]="state.stateId">{{state.stateName}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </td>
+          </tr>
+        </div>
+      </tbody>
+    </table>
+  </form>
+</div>

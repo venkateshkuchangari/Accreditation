@@ -1,0 +1,50 @@
+ a {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   height: 100%;
+   width: 100%
+ }
+
+ .outer {
+   display: table;
+   position: absolute;
+   top: 0;
+   left: 0;
+   height: 100%;
+   width: 100%;
+ }
+
+ .middle {
+   display: table-cell;
+   vertical-align: middle;
+ }
+
+ .tile-mat-card {
+   color: rgba(37, 37, 37, 0.822) !important;
+   background: rgb(187, 186, 186);
+   cursor: pointer;
+   font-weight: 600;
+   text-align: center;
+   max-width: 250px;
+   -webkit-transition: all ease 0.5s;
+   transition: all ease 0.5s;
+   padding: 10px !important;
+
+   &:hover {
+     .mat-icon {
+       color: #df223b !important;
+     }
+
+     color: #df223b !important;
+     box-shadow: #df223b 0px 3px 0px !important;
+   }
+
+   display: flex;
+   justify-content: center;
+   align-items: center;
+ }
+
+ .icon-alignment {
+   vertical-align: middle;
+ }

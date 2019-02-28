@@ -1,0 +1,84 @@
+.head {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  background-color: #df223b !important;
+  color: white !important;
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, .2), 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12);
+
+  mat-icon {
+    color: white !important;
+
+    &:hover {
+      color: #424242 !important;
+    }
+  }
+}
+
+header {
+  width: 100%;
+  height: 37px;
+}
+
+.user-menu-item {
+  width: 180px !important;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+
+
+
+.mat-menu-item {
+  &:hover {
+    box-shadow: #df223b 0px 1.5px 0px !important;
+  }
+}
+
+mat-card .tiles-card {
+  background: rgb(187, 186, 186);
+
+  &:hover {
+    box-shadow: #df223b 0px 3px 0px !important;
+  }
+}
+
+.item-alignment {
+  width: 275px;
+}
+
+.text-alignments {
+  height: 50px;
+  width: 256px;
+}
+
+.common-alignments {
+  display: flex;
+  white-space: normal !important;
+  justify-content: center;
+  align-items: center;
+  flex-flow: row wrap;
+  padding: 4px !important;
+  font-size: 12px !important;
+}
+
+.no-record-text {
+  height: 60px;
+  width: 175px;
+}
+
+.header-content {
+  font-size: 25px;
+
+  a {
+    color: white !important;
+
+    &:hover {
+      color: #424242 !important;
+    }
+  }
+}

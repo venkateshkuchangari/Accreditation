@@ -1,0 +1,21 @@
+<div *ngIf="dataLoaded">
+  <div class="div-hcenter">
+    <img class="logo" src="../../../assets/images/logo.jpeg" alt="logo">
+  </div>
+  <br>
+  <br>
+  <mat-card mat-elevation-z8 class="div-hcenter confirm-card">
+    <div class="space-between" style="margin:10px">
+      <div class="tab-info-heading">
+        Application Id: {{applicationId}}
+      </div>
+      <div class="tab-info-heading">
+        Payment Confirmation: {{paymentResponse?.paymentRefNo}}
+      </div>
+    </div>
+    <hr>
+    <div [innerHTML]="confirmationMessage">
+    </div>
+
+  </mat-card>
+</div>

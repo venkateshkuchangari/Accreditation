@@ -1,0 +1,265 @@
+// Medium screen size - IPad view standard
+@media screen and (min-width: 960px) and (max-width: 1279px) {
+  .sidenav-container-application-master {
+    min-height: 520px;
+    margin-top: 50px;
+  }
+
+  .application-master-exp-panel {
+    height: 35px !important;
+  }
+
+  .application-master-exp-panel:not {
+    height: 35px !important;
+  }
+
+  .application-router-outlet {
+    width: 92%;
+  }
+
+  .ag-header-cell-text {
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .ag-font-style {
+    font-size: 12px
+  }
+
+  .header-div {
+    font-size: 14px;
+  }
+
+  .mat-dialog-title {
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .tab-info-heading, .mat-step-label {
+    font-size: 14px;
+  }
+
+  .mat-tab-label-active {
+    font-weight: 500
+  }
+
+  p,
+  td {
+    font-size: 12px
+  }
+
+  .mat-toolbar {
+    font-size: 14px;
+  }
+
+  .mat-icon {
+    font-size: 16px
+  }
+
+  .app-container {
+    min-height: 650px;
+  }
+
+  .flexbox-container {   
+    margin-bottom:80px;
+  }
+
+  .flexbox-tiles {
+    width: 150px;
+  }
+
+  .cards-wrap-up {
+    height: 120px;
+  }
+
+  .logo {
+    margin-top: 50px;
+    height: 125px;
+    width: 125px;
+  }
+
+  .tr-height-alignment {
+    height: 30px;
+  }
+
+  .mat-list-item {
+    font-size: 14px !important;
+  }
+
+  .create-new-app-button {
+    width: 95%;
+  }
+
+  .tile-text {
+    font-size: 12px;
+  }
+
+  .custom-text-font-style {
+    font-size: 12px;
+  }
+
+  .main-router{
+    min-height: 81.1vh;
+}
+  .header-icon{
+    font-size: 20px !important;
+  }
+  .sidenav-application-master {
+    width: 180px;
+  }
+
+  .sidenav {
+    width: 150px;
+  }
+
+  .sidenav-height {
+    min-height: 595px;
+  }
+
+  .application-card-title {
+    font-size: 14px !important;
+  }
+
+  .mat-toolbar-level2 {
+    position: fixed;
+    left: 0;
+    z-index: 5;
+    margin-top: 5px !important;
+    background-color: white !important;
+    height: 30px !important;   
+  }
+
+  .header-div {
+    height: 40px;
+    width: 100%
+  }
+
+  .facility-mat-item {
+    height: 45px !important;
+
+    &:hover {
+      box-shadow: 3px 0px 0px 0px #424242 !important;
+    }
+  }
+
+  h3 {
+    font-size: 1.0rem;
+  }
+
+  h4 {
+    font-size: .7rem;
+  }
+
+  .sidenav-container {
+    min-height: 600px;
+  }
+
+  .mat-item {
+    height: 50px !important;
+    padding-left: 15px;
+  }
+
+  .details-tab-mat-card {
+    margin-bottom: 3px;
+  }
+
+  .mat-dialog-content-eprofile {
+    height: 395px;
+  }
+
+  .mat-datepicker-content .mat-calendar {
+    width: 235px !important;
+    height: 275px !important;
+  }
+
+  .mat-calendar-body-label {
+    padding-top: 3% !important;
+    padding-bottom: 3% !important;
+  }
+
+  .mat-calendar-header {
+    padding: 1px 3px 0 3px !important;
+  }
+
+  .mat-dialog-content-usercontact {
+    height: 385px;
+  }
+
+  .mat-dialog-content-deatilsAddrTab {
+    height: 230px;
+  }
+
+  .mat-dialog-content-deatilsTab {
+    height: 360px;
+  }
+
+  .mat-dialog-content-busiInfoTab {
+    height: 465px;
+  }
+
+  .mat-dialog-content-pharmTab {
+    padding: 5px 75px !important;
+    width: 650px;
+  }
+
+  .mat-dialog-content-inspection {
+    height: 210px;
+  }
+
+  .mat-dialog-content-accr-tab {
+    height: 320px;
+  }
+
+  .mat-dialog-content-accr-tab-exp {
+    height: 450px;
+  }
+
+  .mat-dialog-content-accr-action{
+    height:180px;
+}
+  .mat-dialog-content-contact {
+    height: 455px;
+  }
+
+  .mat-dialog-content-indivOwner {
+    height: 445px;
+  }
+
+  .mat-dialog-content-compOwner {
+    height: 435px;
+  }
+
+  .mat-dialog-content-facLicense {
+    height: 290px;
+  }
+
+  .mat-dialog-content-staffLic {
+    height: 210px;
+  }
+
+  .mat-dialog-content-staffLic-exp {
+    height: 460px;
+  }
+
+  .level-1-header-alignment {
+    height: 45px !important;
+  }
+
+  .level-1-footer-alignment {
+    height: 45px !important;
+  }
+  .no-record-text{
+    font-size: 10px;
+}
+  .mini-cards-wrap-up {
+    margin: 2px;
+    width: 35px;
+    height: 25px;
+    font-size: 9px;
+  }
+
+  .mini-menu-panel {
+    width: 200px !important;
+  }
+
+}

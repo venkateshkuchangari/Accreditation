@@ -1,0 +1,52 @@
+<div class="space-between">
+  <h3 mat-dialog-title>Application Information</h3>
+  <button mat-icon-button (click)="onClose()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<mat-dialog-content *ngIf="dataLoaded" class="mat-dialog-content-application">
+  <table class="outer-table">
+    <tr>
+      <td align="center" class="tab-info-heading outer-table-td">
+        Facility Details
+      </td>
+      <td align="center" class="tab-info-heading outer-table-td">
+        Selected Programs
+      </td>
+    </tr>
+    <tr *ngFor="let item of details">
+      <td class="outer-table-td">
+        <table>
+          <tr>
+            <td class="table-label">{{item.legalBusinessName}} |</td>
+            <td class="table-label">
+              <small> E-Profile ID: {{item.eProfileID}}</small></td>
+          </tr>
+          <tr>
+            <td class="table-label">Primary DBA:</td>
+            <td>{{item.primaryDBA}}</td>
+          </tr>
+          <tr>
+            <td class="table-label">Address:</td>
+            <td>{{item.addressLine1}} {{item.addressLine2}}</td>
+          </tr>
+          <tr>
+            <td class="table-label">City:</td>
+            <td>{{item.city}}</td>
+          </tr>
+          <tr>
+            <td class="table-label">State:</td>
+            <td>{{item.stateName}}</td>
+          </tr>
+        </table>
+      </td>
+      <td align="center" class="outer-table-td">
+        <ng-container *ngFor="let element of item.programTypes">
+          <p *ngIf="element.isSelected == true">
+            {{element.programTypeName}}
+          </p>
+        </ng-container>
+      </td>
+    </tr>
+  </table>
+</mat-dialog-content>

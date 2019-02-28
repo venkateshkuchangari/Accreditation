@@ -1,0 +1,241 @@
+// Monitor View Standards 
+
+@media screen and (min-width: 1441px) {
+    .sidenav-container-application-master {
+        min-height: 635px;
+        margin-top: 65px;
+    }
+
+    .application-router-outlet {
+        width: 98%;
+    }
+
+
+    .tile-text {
+        font-size: 18px;
+    }
+
+    .main-router {
+        min-height: 85.58vh;
+    }
+
+    .custom-text-font-style {
+        font-size: 16px;
+    }
+
+    .flexbox-container {
+        margin-bottom: 150px;
+    }
+
+    .flexbox-tiles {
+        width: 210px;
+    }
+
+    .cards-wrap-up {
+        height: 180px;
+    }
+
+    .mat-toolbar-level2 {
+        position: fixed;
+        left: 0;
+        z-index: 5;
+        background-color: white !important;
+        height: 50px !important;
+    }
+
+    .header-div {
+        height: 60px;
+        width: 100%
+    }
+
+    .facility-mat-item {
+        height: 60px !important;
+
+        &:hover {
+            box-shadow: 3px 0px 0px 0px #424242 !important;
+        }
+    }
+
+    .logo {
+        margin-top: 60px;
+        height: 150px;
+        width: 150px;
+    }
+
+    .tr-height-alignment {
+        height: 35px;
+    }
+
+    .mat-list-item {
+        font-size: 16px !important;
+    }
+
+    .create-new-app-button {
+        width: 98%;
+    }
+
+    .ag-header-cell-text {
+        font-size: 15px;
+        font-weight: 600;
+    }
+
+    .ag-font-style {
+        font-size: 15px
+    }
+
+    .header-div {
+        font-size: 18px;
+    }
+
+    .mat-dialog-title {
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .tab-info-heading,
+    .mat-step-label {
+        font-size: 16px;
+    }
+
+    p,
+    td {
+        font-size: 14px
+    }
+
+    .mat-toolbar {
+        font-size: 18px;
+    }
+
+    .mat-button-wrapper {
+        font-size: 12px;
+    }
+
+    .mat-datepicker-toggle-default-icon {
+        font-size: 18px;
+    }
+
+    .sidenav-container {
+        min-height: 700px;
+    }
+
+    .sidenav-application-master {
+        width: 250px;
+    }
+
+    .sidenav {
+        width: 200px;
+    }
+
+    .application-card-title {
+        font-size: 15px !important;
+    }
+
+    h3 {
+        font-size: 1.1rem;
+    }
+
+    h4 {
+        font-size: .9rem;
+    }
+
+    .header-icon {
+        font-size: 30px !important;
+    }
+
+    .mat-item {
+        height: 60px !important;
+        padding-left: 20px;
+    }
+
+    .mat-dialog-content-eprofile {
+        height: 465px;
+    }
+
+    .mat-dialog-content-usercontact {
+        height: 445px;
+    }
+
+    .mat-dialog-content-deatilsAddrTab {
+        height: 260px;
+    }
+
+    .mat-dialog-content-deatilsTab {
+        height: 420px;
+    }
+
+    .mat-dialog-content-busiInfoTab {
+        height: 600px;
+    }
+
+    .details-tab-mat-card {
+        margin-bottom: 20px;
+    }
+
+    .mat-icon {
+        font-size: 22px;
+    }
+
+    .mat-dialog-content-inspection {
+        height: 240px;
+    }
+
+    .mat-dialog-content-accr-tab {
+        height: 360px;
+    }
+
+    .mat-dialog-content-accr-tab-exp {
+        height: 520px;
+    }
+
+    .mat-dialog-content-accr-action {
+        height: 220px;
+    }
+
+    .mat-dialog-content-contact {
+        height: 570px;
+    }
+
+    .mat-dialog-content-indivOwner {
+        height: 520px;
+    }
+
+    .mat-dialog-content-compOwner {
+        height: 490px;
+    }
+
+    .mat-dialog-content-facLicense {
+        height: 320px;
+    }
+
+    .mat-dialog-content-staffLic {
+        height: 235px;
+    }
+
+    .mat-dialog-content-staffLic-exp {
+        height: 490px;
+    }
+
+    .level-1-header-alignment {
+        height: 55px !important;
+    }
+
+    .level-1-footer-alignment {
+        height: 55px !important;
+    }
+
+    .no-record-text {
+        font-size: 14px;
+    }
+
+    .mini-cards-wrap-up {
+        margin: 5px;
+        width: 60px;
+        height: 60px;
+        font-size: 15px;
+    }
+
+    .mini-menu-panel {
+        width: 270px !important;
+    }
+
+}

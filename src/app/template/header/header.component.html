@@ -1,0 +1,66 @@
+<header>
+  <mat-toolbar class="head mat-elevation-z4 level-1-header-alignment">
+    <button mat-icon-button [matMenuTriggerFor]="minimenu">
+      <mat-icon class="header-icon" matTooltip="Open Menu"> view_headline </mat-icon>
+    </button>
+    <span class="header-content">
+      <a routerLink="/dashboard" matTooltip="Go to Dashboard">NABP</a>
+    </span>
+    <mat-menu #minimenu="matMenu" [overlapTrigger]="false" class="mini-menu-panel">
+      <ng-container *ngFor="let tile of tiles; let ind=index">
+        <a mat-menu-item *ngIf="tiles_access[ind]" matTooltip={{tile.toolTipText}} [routerLink]="tile.url"
+          [queryParams]="tile.queryParams">
+          <mat-icon>
+            {{tile.icon}}
+          </mat-icon>
+          <span>
+            {{tile.name}}
+          </span>
+        </a>
+      </ng-container>
+    </mat-menu>
+    <span class="example-spacer"></span>
+    <span>{{_userName}}</span>
+    <span>
+      <button mat-icon-button [matMenuTriggerFor]="list">
+        <mat-icon class="header-icon" *ngIf="!unreadAlerts.length">notifications_none</mat-icon>
+        <mat-icon class="header-icon" *ngIf="unreadAlerts.length" matBadge={{unreadAlerts.length}} matBadgeColor="warn">notifications_active</mat-icon>
+      </button>
+    </span>
+    <mat-menu #list="matMenu" [overlapTrigger]="false">
+      <div class="item-alignment" *ngIf="unreadAlerts.length">
+        <table>
+          <div *ngFor="let item of unreadAlerts">
+            <tr>
+              <td style="width: 270px;">
+                <mat-card mat-raised-button (click)="showNotification(item)" class="text-alignments common-alignments">
+                  {{item.subject}}
+                </mat-card>
+              </td>
+            </tr>
+          </div>
+        </table>
+      </div>
+      <div class="no-record-text common-alignments" *ngIf="!unreadAlerts.length">
+        <mat-card>
+          Alerts are unavailable.
+        </mat-card>
+      </div>
+    </mat-menu>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon class="header-icon" matTooltip="Open User Menu" >more_vert</mat-icon>
+    </button>
+    <mat-menu [overlapTrigger]="false" #menu="matMenu">
+      <ng-container *ngFor="let menu of verticalMenuDropdown; let ind=index">
+        <a mat-menu-item class="user-menu-item" matTooltip={{menu.toolTipText}} [routerLink]="menu.url">
+          <mat-icon>{{menu.icon}}</mat-icon>
+          <span>{{menu.name}}</span>
+        </a>
+      </ng-container>
+      <a class="user-menu-item" mat-menu-item (click)="onLogOut()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Logout</span>
+      </a>
+    </mat-menu>
+  </mat-toolbar>
+</header>

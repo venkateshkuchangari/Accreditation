@@ -1,0 +1,89 @@
+<div>
+  <em class="is-required" style="padding-right: 50px; display:flex; justify-content: flex-end;"> *Required </em>
+  <form *ngIf="formGroupCreated" [formGroup]="form">
+    <table class="tablestyles">
+      <tbody *ngFor="let item of objectProps;let index = index;">
+        <tr *ngIf="item.display">
+          <td style="padding-left:20px; width:60%;" class="table-label">
+            {{item.questionText}}<span class="is-required">*</span>
+          </td>
+          <td style="width:30%;">
+            <div [ngSwitch]="item.questionTypeId">
+              <div *ngSwitchCase="'1702'">
+                <mat-radio-group [formControlName]="item.key">
+                  <mat-radio-button *ngFor="let data of item.questionDataList" [value]="data.applicationQuestionDataId"
+                    (change)="onSelectionChanged($event)">
+                    {{data.applicationQuestionDataValue}}</mat-radio-button>
+                </mat-radio-group>
+              </div>
+              <div *ngSwitchCase="'1708'">
+                <mat-radio-group class="custom-radio-group" [formControlName]="item.key">
+                  <mat-radio-button *ngFor="let data of item.questionDataList" [value]="data.applicationQuestionDataId"
+                    (change)="onSelectionChanged($event)">
+                    {{data.applicationQuestionDataValue}}
+                  </mat-radio-button>
+                </mat-radio-group>
+              </div>
+
+              <div *ngSwitchCase="'1700'" class="controlalign">
+                <mat-form-field appearance="outline">
+                  <mat-label>Enter Here</mat-label>
+                  <input matInput placeholder="Enter Here" matTooltip="{{getTooltip(item.key)}}"
+                    [formControlName]="item.key" required [errorStateMatcher]="matcher">
+                </mat-form-field>
+              </div>
+
+              <div *ngSwitchCase="'1703'" class="controlalign">
+                <mat-form-field appearance="outline">
+                  <mat-label>Select Here</mat-label>
+                  <mat-select [formControlName]="item.key" required [errorStateMatcher]="matcher"
+                    (selectionChange)="onSelectionChanged($event)">
+                    <mat-option *ngFor="let data of item.questionDataList" [value]="data.applicationQuestionDataId">
+                      {{data.applicationQuestionDataValue}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div *ngSwitchCase="'1707'" class="controlalign">
+                <mat-form-field appearance="outline">
+                  <mat-label>Select State(s) Here</mat-label>
+                  <mat-select [formControlName]="item.key" matTooltip="{{getTooltip(item.key)}}" required
+                    [errorStateMatcher]="matcher" multiple (selectionChange)="selectMultipleChanged($event.value)">                
+                    <mat-checkbox class="select-all-check mat-option" (change)="selectAll($event,index)" [checked]="selectAllChecked">
+                      Select all
+                    </mat-checkbox> 
+                    <hr>                                  
+                    <mat-option *ngFor="let data of stateList" [value]="data.stateId">
+                      {{data.stateName}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div *ngSwitchCase="'1701'">
+                <mat-checkbox [formControlName]="item.key"> </mat-checkbox>
+              </div>
+              <div *ngSwitchCase="'1705'" class="controlalign">
+                <file-upload (filestoParent)="getFilesfromChild($event,index)" [isMultiple]="true"
+                  [documentTypeId]="documentTypeIds[index]" [filesExisting]="existingFileMetadatas[index]">
+                </file-upload>
+              </div>
+              <div *ngSwitchCase="'1709'" class="controlalign">
+                <mat-form-field appearance="outline">
+                  <mat-label>Select all that apply</mat-label>
+                  <mat-select [formControlName]="item.key" matTooltip="{{getTooltip(item.key)}}" required
+                    [errorStateMatcher]="matcher" multiple  (selectionChange)="onSelectionChanged($event)">
+                    <mat-option  *ngFor="let data of item.questionDataList" [value]="data.applicationQuestionDataId">
+                    {{data.applicationQuestionDataValue}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+  <br>
+  <br>
+</div>

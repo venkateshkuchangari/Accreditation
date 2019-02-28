@@ -1,0 +1,39 @@
+<div  [@.disabled]="true">
+<mat-tab-group [selectedIndex]="tabIndexNumber">
+  <mat-tab *ngIf="tabs_menu_access[0]" label="Facility Details" [disabled]="(actionIdonRoutes=='_rev_accr9')? true : false">
+    <ng-template matTabContent>
+      <app-info-detailtab></app-info-detailtab>
+    </ng-template>
+  </mat-tab>
+  <mat-tab *ngIf="tabs_menu_access[1]" label="Business Information" [disabled]="(actionIdonRoutes=='_rev_accr9')? true : false">
+    <ng-template matTabContent>
+      <app-info-businesshours></app-info-businesshours>
+    </ng-template>
+  </mat-tab>
+  <mat-tab *ngIf="actionIdonRoutes=='_rev_accr9'" label="Business Questions" [disabled]="(actionIdonRoutes=='_rev_accr9')? true : false">
+    <ng-template matTabContent>
+      <app-business-question></app-business-question>
+    </ng-template>
+  </mat-tab>
+  <mat-tab *ngIf="tabs_menu_access[2]" label="Facility Activities" [disabled]="(actionIdonRoutes=='_rev_accr9')? true : false">
+    <ng-template matTabContent>
+      <app-pharmacyactivities></app-pharmacyactivities>
+    </ng-template>
+  </mat-tab>
+  <mat-tab *ngIf="tabs_menu_access[3]" label="Inspection History" [disabled]="(actionIdonRoutes=='_rev_accr9')? true : false">
+    <ng-template matTabContent>
+      <app-inspection></app-inspection>
+    </ng-template>
+  </mat-tab>
+  <mat-tab *ngIf="tabs_menu_access[4]" label="Accreditation History" [disabled]="(actionIdonRoutes=='_rev_accr9')? true : false">
+    <ng-template matTabContent>
+      <app-accreditation></app-accreditation>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="Disciplinary Action" [disabled]="(actionIdonRoutes=='_rev_accr9')? true : false">
+    <ng-template matTabContent>
+      <app-disciplinary-action></app-disciplinary-action>
+    </ng-template>
+  </mat-tab>  
+</mat-tab-group>
+</div>

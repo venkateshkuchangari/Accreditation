@@ -1,0 +1,143 @@
+<div style="display:flex; justify-content: space-between;">
+  <h3 mat-dialog-title>{{(dialogData!=null)?"Edit facility Information":"Enter facility Information"}}</h3>
+  <button mat-icon-button (click)="onClose()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<form [formGroup]="licenseForm">
+  <mat-dialog-content class="mat-dialog-content-facLicense">
+    <table>
+      <tr>
+        <td>
+          <mat-form-field>
+            <mat-select placeholder="License State/Agency" formControlName="stateId" required [errorStateMatcher]="matcher"
+              (selectionChange)="getSelectedLicenseTypes($event.value)">
+              <mat-option *ngFor="let state of licenseAgencyList" [value]="state.id">{{state.text}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="licenseForm.get('stateId').hasError('required')">
+              License State/Agency is
+              <strong>Required</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput placeholder="Business Name on License" formControlName="nameOnLicense" required
+              [errorStateMatcher]="matcher">
+            <mat-error *ngIf="licenseForm.get('nameOnLicense').hasError('required')">
+              Business Name on License is
+              <strong>Required</strong>
+            </mat-error>
+            <mat-error *ngIf="licenseForm.get('nameOnLicense').hasError('pattern')">
+              Business Name on License is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <mat-select placeholder="License Type" formControlName="licenseTypeID" required [errorStateMatcher]="matcher"
+              (selectionChange)="getLicenseTypeRegex($event.value)">
+              <mat-option *ngFor="let item of selectedLicenseTypes" [value]="item.id">{{item.text}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="licenseForm.get('licenseTypeID').hasError('required')">
+              License Type is
+              <strong>Required</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <input matInput formControlName="licenseNumber" placeholder="License Number" required [errorStateMatcher]="matcher">
+            <mat-hint align="end">{{licenseFormatMessage||""}}</mat-hint>
+            <mat-error *ngIf="licenseForm.get('licenseNumber').hasError('required')">
+              License Number is
+              <strong>Required</strong>
+            </mat-error>
+            <mat-error *ngIf="licenseForm.get('licenseNumber').hasError('pattern')">
+              License Number is
+              <strong>Incorrect. {{licenseFormatMessage || ""}}</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input readonly matInput [matDatepicker]="picker" placeholder="Issue Date" formControlName="originalIssueDate">
+            <button *ngIf="licenseForm.get('originalIssueDate').value!=null && licenseForm.get('originalIssueDate').value!=''"
+              matSuffix mat-icon-button (click)="licenseForm.get('originalIssueDate').reset()">
+              <mat-icon style="font-size:18px">close</mat-icon>
+            </button>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input readonly matInput [matDatepicker]="picker2" placeholder="Expiration Date" formControlName="licenseValidTo"
+              required [errorStateMatcher]="matcher">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+            <mat-error *ngIf="licenseForm.get('licenseValidTo').hasError('required')">
+              Expiration Date is
+              <strong>Required</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <mat-select placeholder="Status" formControlName="licenseStatusTypeID" required [errorStateMatcher]="matcher">
+              <mat-option *ngFor="let item of statusTypes" [value]="item.id">{{item.text}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="licenseForm.get('licenseStatusTypeID').hasError('required')">
+              Status is
+              <strong>Required</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td style="width:33%" class="table-label">
+          Is there a Pharmacist in Charge at facility?<span class="is-required">*</span>
+        </td>
+        <td>
+          <mat-radio-group class="rad-group" formControlName="isPICAssociated">
+            <mat-radio-button class="rad-button" *ngFor="let radio of picExistRadioGroup" [value]="radio.id" (change)="resetPICeProfileId($event)">
+              {{radio.text}}
+            </mat-radio-button>
+          </mat-radio-group>
+        </td>
+      </tr>
+      <tr *ngIf="showPharmacistInchargeSection">
+        <td>
+          <mat-form-field>
+            <input matInput formControlName="picEprofileID" placeholder="PIC e-Profile ID" required [errorStateMatcher]="matcher">
+            <mat-error *ngIf="licenseForm.get('picEprofileID').hasError('required')">
+              PIC e-Profile ID is <strong>Required</strong>
+            </mat-error>
+            <mat-error *ngIf="licenseForm.get('picEprofileID').hasError('pattern')">
+              PIC e-Profile ID is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput formControlName="picHours" placeholder="PIC Hours at Pharmacy" required [errorStateMatcher]="matcher">
+            <mat-error *ngIf="licenseForm.get('picHours').hasError('required')">
+              PIC e-Profile ID is <strong>Required</strong>
+            </mat-error>
+            <mat-error *ngIf="licenseForm.get('picHours').hasError('pattern')">
+              PIC e-Profile ID is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+    </table>
+    <mat-dialog-actions class="flex-space-around">
+      <button mat-raised-button color="primary" (click)="clearForm()">Clear</button>
+      <button mat-raised-button color="primary" [disabled]="!licenseForm.valid" (click)="onSave()">{{(dialogData!=undefined)?"Update":"Save"}}</button>
+    </mat-dialog-actions>
+  </mat-dialog-content>
+</form>

@@ -1,0 +1,92 @@
+<div *ngIf="detailsData!=undefined" class="outer">
+  <mat-card class="mat-elevation-z4 details-tab-mat-card facility-level-card-size">
+    <div class="space-between" style="margin:10px">
+      <div class="tab-info-heading">
+        Facility Details
+      </div>
+      <button mat-raised-button color="primary" (click)='openOrganizationDetailsDialog()'>Edit</button>
+    </div>
+    <hr>
+    <table class="details-table">
+      <tr class="tr-height-alignment">
+        <td class="td1 table-label"> Facility e-Profile ID:</td>
+        <td class="td2">{{detailsData?.eprofileId||""}}</td>
+        <td class="td1 table-label">Store Number:</td>
+        <td class="td2">{{detailsData?.storeNumber||""}}</td>
+      </tr>
+      <tr class="tr-height-alignment">
+        <td class="td1 table-label">Legal Business Name:</td>
+        <td class="td2">{{detailsData?.legalBusinessName||""}}</td>
+        <td class="td1 table-label">FEIN Number:</td>
+        <td class="td2">{{detailsData?.feinNumber||""}}</td>
+      </tr>
+      <tr class="tr-height-alignment">
+        <td class="td1 table-label"> Doing Business As:
+        </td>
+        <td class="td2">
+          {{detailsData?.primaryDBA||""}}
+          <span *ngIf="detailsData?.dbaList.length!=0"><button mat-icon-button matTooltip="Click to See Other DBAs" (click)="openListDialog(detailsData?.dbaList,'Other DBAs')">
+              <mat-icon>chevron_right</mat-icon>
+            </button></span>
+        </td>
+        <td class="td1 table-label">NPI Number:</td>
+        <td class="td2"> {{detailsData?.npiNumber||""}}         
+        </td>
+      </tr>
+      <tr class="tr-height-alignment">
+        <td class="td1 table-label">Formerly Known As:</td>
+        <td class="td2">{{detailsData?.fkaList[0]||""}}
+          <span *ngIf="detailsData?.fkaList.length!=0"><button mat-icon-button matTooltip="Click to see all FKAs" (click)="openListDialog(detailsData?.fkaList,'FKAs')">
+              <mat-icon>chevron_right</mat-icon>
+            </button></span>
+        </td>
+        <td class="td1 table-label">NCPDP Number:</td>
+        <td class="td2"> {{detailsData?.ncpdpNumber||""}}         
+        </td>
+      </tr>
+    </table>
+  </mat-card>
+</div>
+<!-- Address Details Section -->
+<br>
+<div *ngIf="detailsData!=undefined" class="outer">
+  <mat-card class="mat-elevation-z4 details-tab-mat-card facility-level-card-size">
+    <div class="space-between" style="margin:10px">
+      <div class="tab-info-heading">
+        Facility Address Details
+      </div>
+      <button mat-raised-button color="primary" (click)='openAddressDialog()'>Edit</button>
+    </div>
+    <hr>
+    <table class="details-table">
+      <tr class="tr-height-alignment">
+        <td class="td1 table-label">Facility Address:</td>
+        <td class="td2">{{detailsData?.address?.addressLine1||"" |titlecase}} {{detailsData?.address?.addressLine2||""
+          |titlecase }}</td>
+        <td class="td1 table-label">Facility Email:</td>
+        <td class="td2"> {{detailsData?.email||""}}</td>
+      </tr>
+      <tr class="tr-height-alignment">
+        <td>&nbsp;</td>
+        <td>{{detailsData?.address?.city||"" |titlecase}}  {{(detailsData?.address?.stateCode!='')? ', ': ''}} {{detailsData?.address?.stateCode||"" |uppercase}}
+            {{(detailsData?.address?.zip!='')? ', ': ''}} {{detailsData?.address?.zip||""}} {{(detailsData?.address?.countryName!='')? ' ': ''}} {{detailsData?.address?.countryName||""|uppercase}}</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr class="tr-height-alignment">
+        <td class="td1 table-label">Phone Number:</td>
+        <td class="td2"> {{detailsData?.phone.phoneNumber||"" |phonenumber}}
+        <td class="td1 table-label">Admin Email:</td>
+        <td class="td2"> {{detailsData?.adminEmail||""}}
+      </tr>
+      <tr class="tr-height-alignment">
+        <td class="td1 table-label">Fax Number:</td>
+        <td class="td2"> {{detailsData?.fax.phoneNumber||"" |phonenumber}}
+        <td class="td1 table-label">Website:</td>
+        <td class="td2">{{detailsData?.website||""}}
+        </td>
+      </tr>
+    </table>
+  </mat-card>
+  <br>
+</div>

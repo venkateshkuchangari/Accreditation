@@ -1,0 +1,45 @@
+<mat-card *ngIf="dataLoaded" class="facility-level-card-size" mat-elevation-z4>
+  <div class="space-between" style="margin:10px">
+    <div class="tab-info-heading">
+      Facility Licenses
+    </div>
+    <div>
+      <button mat-raised-button color="primary" (click)="addFacilityLicense()">Add Facility License</button>
+      <button mat-raised-button color="primary" [disabled]="selectedRow.length == 0" (click)="editFacilityLicense()">Edit</button>
+      <button mat-raised-button color="primary" [disabled]="selectedRow.length == 0" (click)="deleteFacilityLicense()">Delete</button>
+    </div>
+  </div>
+  <hr>
+  <p class="user-info-text"> Please include all applicable licenses/permits/registrations associated with your facility, including, but not limited to, any pending, closed, inactive, and active licenses held by the business entity; any licenses issued to any other entity located at the same address; all nonresident licenses, state controlled substance licenses, DEA registration, sterile compounding licenses, outsourcing licenses, nuclear/radiopharmaceutical licenses, wholesale distribution, etc. </p>
+  <p class="user-info-text" ><em>To upload multiple licenses at once,download the </em><b> Template.csv </b><em> file and fill it according to the instructions provided in </em><b> Instructions.pdf </b><em>. Click on </em><b>Import CSV</b><em> to select the file, then click on </em><b>Verify & Submit</b></p>
+  <div class="space-between" style="margin:15px">
+    <div>
+      <a matTooltip="Click here to download" mat-stroked-button href={{templateURl}} target="blank">
+        <mat-icon>insert_drive_file</mat-icon>Template.csv
+      </a>
+      &nbsp;
+      <a matTooltip="Click here to download" mat-stroked-button href={{instructionsURL}} target="blank">
+        <mat-icon>picture_as_pdf</mat-icon>Instructions.pdf
+      </a>
+    </div>
+    <div>
+      <input type="file" #file style="display: none" accept=".csv" (change)="onFilesAdded()">
+      <span mat-button>
+        <span matTooltip="Selected file to upload">{{displayText}}</span>
+        <button mat-stroked-button (click)="addFiles()">
+          Import CSV
+        </button>
+      </span>
+      <button mat-stroked-button [disabled]="licenseFile.length==0" (click)="verifySubmitFile()">
+        Verify & Submit
+      </button>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="rowData.length==0">
+    <h3 style="color: rgb(155, 22, 22)">No facility licenses for this Facility</h3>
+  </div>
+  <dynamic-grid *ngIf="rowData.length!=0" paginationPageSize="7" [data]="rowData" [columnDefs]="columnDefs"
+    (onSelection)="selectedEvent($event)" (gridReadyEvent)="onFacilityLicenseGridReady($event)">
+  </dynamic-grid>
+</mat-card>

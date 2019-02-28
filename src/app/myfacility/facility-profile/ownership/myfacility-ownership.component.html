@@ -1,0 +1,14 @@
+  <div  [@.disabled]="true">
+        <mat-tab-group>
+          <mat-tab  *ngIf="tabs_menu_access[0]"  label="Individual">
+            <ng-template matTabContent>
+             <individual-ownership></individual-ownership>
+            </ng-template>
+          </mat-tab>
+          <mat-tab  *ngIf="tabs_menu_access[1]"  label="Company">
+            <ng-template matTabContent>
+              <company-ownership></company-ownership>
+            </ng-template>
+          </mat-tab>
+        </mat-tab-group>
+  </div> 

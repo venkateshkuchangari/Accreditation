@@ -1,0 +1,20 @@
+<h2 mat-dialog-title class="statement-header">Statement of Agreement</h2>
+<hr>
+<mat-dialog-content class="attestation-text">
+  <div [innerHTML]="info"></div>
+  <div>
+    <mat-checkbox (change)="agreementCheckboxChanged($event)">
+     <span class="statement-checkbox-label"> {{checkboxText}}</span>
+    </mat-checkbox>
+  </div>
+  <div>
+    <em class="is-required"><small>You must accept the Statement of Agreement before you can proceed to the application
+        process.*</small></em>
+  </div>
+  <hr>
+  <mat-dialog-actions style="display: flex; justify-content: space-around;">
+    <button mat-raised-button (click)='goToBack()' color="primary">Disagree</button>
+    <button mat-raised-button color="primary" [disabled]="!agreementCheckboxChecked" (click)='goContinue()'>Agree &
+      Continue</button>
+  </mat-dialog-actions>
+</mat-dialog-content>

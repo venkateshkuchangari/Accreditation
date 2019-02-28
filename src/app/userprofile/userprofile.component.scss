@@ -1,0 +1,29 @@
+.details-table{
+    width:100%;
+   }
+tr{
+    height: 40px;
+    width: 100%
+}
+
+.space-between {
+    display: flex;
+   justify-content: space-between;
+   background-color: transparent;
+   margin-top: 10px;
+  
+}
+.td1{
+    width:20%;
+   }
+.td2{
+    width:30%;
+    font-weight: 400;
+}
+
+.style123{
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+

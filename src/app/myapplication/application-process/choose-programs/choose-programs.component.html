@@ -1,0 +1,33 @@
+<div *ngIf="dataLoaded">
+  <mat-selection-list #selection (selectionChange)="selectionChanged($event,selection.selectedOptions.selected)">
+    <table>
+      <tr>
+        <th>
+          Facility Details
+        </th>
+        <th *ngFor="let header of tableHeaders">
+          <img [src]="header.programImage" matTooltip="{{header.programTooltip}}">
+          <br>
+          {{header.programName}}
+        </th>
+      </tr>
+      <tr *ngFor="let item of applicationPrograms">
+        <td class="facility-td">
+          <b>{{item.legalBusinessName}} | <small>E-ProfileId: {{item.eProfileID}} </small></b> <br>
+          <b class="table-label">Primary DBA: </b>{{item.primaryDBA}}<br>
+          <b class="table-label">Address: </b>{{item.addressLine1}} {{item.addressLine2}}{{',' + item.city +','}}
+          {{item.stateName + ','}} {{item.countryName}}
+        </td>
+        <td *ngFor="let program of item.programTypes">
+          <mat-list-option [checkboxPosition]='before' *ngIf="program.isEligible; else else_content" [selected]="program.isSelected"
+            [value]="{'programTypeId':program.programTypeId,'facilityId':item.organizationId}">Select</mat-list-option>
+          <ng-template #else_content>
+            &nbsp;
+          </ng-template>
+        </td>
+      </tr>
+    </table>
+  </mat-selection-list>
+  <br>
+  <br>
+</div>

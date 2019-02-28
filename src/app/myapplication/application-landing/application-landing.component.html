@@ -1,0 +1,147 @@
+<div class="space-end create-new-app-button">
+  <br />
+  <a *ngIf="menu_access[0]" mat-raised-button color="primary" [routerLink]="['application-facilities','_app_accr9']"
+    [queryParams]="queryParams" queryParamsHandling="merge">
+    Create New Application
+  </a>
+</div>
+<br>
+<mat-accordion *ngIf="dataLoaded">
+  <mat-expansion-panel *ngIf="menu_access[1]" hideToggle [disabled]="(progressApplications?.length==0)?'true':'false'">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h3>In Progress ({{progressApplications?.length}})</h3>
+      </mat-panel-title>
+      <mat-panel-description>
+        Click on Application to Proceed
+        <mat-icon>cached</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <ng-container *ngFor="let app of progressApplications">
+      <mat-card class="application-card" mat-elevation-z8>
+        <div class="space-between">
+          <mat-card-title class="application-card-title">Application ID: {{app.applicationId}}</mat-card-title>
+          <div>
+            <button mat-raised-button (click)="showInfo(app.applicationId)">
+              Info
+            </button> &nbsp;
+            <button mat-raised-button (click)="proceedApplicationProcess(app.applicationId)">
+              Proceed
+            </button>
+          </div>
+        </div>
+        <mat-card-content>
+          <table>
+            <tr>
+              <td class="table-label"> Status: </td>
+              <td>{{app.applicationStatusTypeDescription||""}} </td>
+              <td class="table-label">Created on:</td>
+              <td> {{app.createdDate||"" | date :shortDate}} </td>
+              <td class="table-label">
+                Valid From: </td>
+              <td> {{app.applicationValidFrom||"" | date :shortDate}}
+              </td>
+              <td class="table-label">
+                Valid To: </td>
+              <td>{{app.applicationValidTo||"" | date :shortDate}}
+              </td>
+            </tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
+    </ng-container>
+  </mat-expansion-panel>
+  <mat-expansion-panel *ngIf="menu_access[2]" hideToggle [disabled]="(submittedApplications?.length==0)?'true':'false'">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h3>Submitted ({{submittedApplications?.length}})</h3>
+      </mat-panel-title>
+      <mat-panel-description>
+        Click on the application to download the PDF
+        <mat-icon>publish</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <ng-container *ngFor="let app of submittedApplications">
+      <mat-card class="application-card" mat-elevation-z8>
+        <div class="space-between">
+          <mat-card-title class="application-card-title">Application ID: {{app.applicationId}}</mat-card-title>
+          <div>
+            <button mat-raised-button (click)="showInfo(app.applicationId)">
+              Info
+            </button>
+          </div>
+        </div>
+        <mat-card-content>
+          <table>
+            <tr>
+              <td class="table-label"> Status: </td>
+              <td> {{app.applicationStatusTypeDescription||""}} </td>
+              <td class="table-label"> Created on:</td>
+              <td> {{app.createdDate||"" | date :shortDate}} </td>
+              <td class="table-label">
+                Valid From:</td>
+              <td> {{app.applicationValidFrom||"" | date :shortDate}}
+              </td>
+              <td class="table-label">
+                Valid To: </td>
+              <td> {{app.applicationValidTo||"" | date :shortDate}}
+              </td>
+            </tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
+    </ng-container>
+  </mat-expansion-panel> 
+  <mat-expansion-panel *ngIf="menu_access[4]" hideToggle [disabled]="(completedApplications?.length==0)?'true':'false'">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h3>Completed ({{completedApplications?.length}})</h3>
+      </mat-panel-title>
+      <mat-panel-description>
+        Click on the application to download the PDF
+        <mat-icon>done_all</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <ng-container *ngFor="let app of completedApplications">
+      <mat-card class="application-card" mat-elevation-z8>
+        <mat-card-title class="application-card-title">Application ID: {{app.applicationId}}</mat-card-title>
+        <mat-card-content>
+          <table>
+            <tr>
+              <td class="table-label"> Status: </td>
+              <td>{{app.applicationStatusTypeDescription||""}} </td>
+              <td class="table-label"> Created on: </td>
+              <td>{{app.createdDate||"" | date :shortDate}} </td>
+            </tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
+    </ng-container>
+  </mat-expansion-panel>
+  <mat-expansion-panel *ngIf="menu_access[5]" hideToggle [disabled]="(cancelledApplications?.length==0)?'true':'false'">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h3>Cancelled ({{cancelledApplications?.length}}) </h3>
+      </mat-panel-title>
+      <mat-panel-description>
+        Click on the application to view your Billing Details
+        <mat-icon>cancel</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <ng-container *ngFor="let app of cancelledApplications">
+      <mat-card class="application-card" mat-elevation-z8>
+        <mat-card-title class="application-card-title">Application ID: {{app.applicationId}}</mat-card-title>
+        <mat-card-content>
+          <table>
+            <tr>
+              <td class="table-label"> Status: </td>
+              <td>{{app.applicationStatusTypeDescription||""}} </td>
+              <td class="table-label"> Created on: </td>
+              <td>{{app.createdDate||"" | date :shortDate}} </td>
+            </tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
+    </ng-container>
+  </mat-expansion-panel>
+</mat-accordion>

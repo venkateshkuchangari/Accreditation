@@ -1,0 +1,78 @@
+mat-form-field {
+  width: 25%;
+}
+
+
+mat-expansion-panel {
+  position: fixed;
+  z-index: 5;
+  margin-bottom: 1px;
+  padding: 5px;
+  width: 100%;
+  left: 0;
+}
+
+.mat-expansion-panel-header-description {
+  align-items: center !important;
+  font-weight: 600
+}
+
+.mat-expansion-panel-header {
+  background-color: rgba(0, 0, 0, 0.178) !important
+}
+
+.step-progress-bar {
+  width: 50px;
+  padding: 20px 0px 20px 20px
+}
+
+.space-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+::ng-deep .valid-badge {
+  .mat-badge-content {
+    background-color: rgb(40, 212, 40) !important;
+    color:black !important;
+  }
+}
+
+::ng-deep .invalid-badge {
+  .mat-badge-content {
+    background-color: rgb(255, 88, 88) !important;
+    color:black !important;
+  }
+}
+
+td {
+  width: 200px;
+}
+
+.mat-option {
+  height: 5em !important;
+  color: black !important;
+}
+
+.complete-link {
+  opacity: 1;
+  box-shadow: 3px 0px 0px 0px #df223b !important;
+  font-weight: 600;
+  pointer-events: all;
+}
+
+.active-link {
+  opacity: 1;
+  box-shadow: 3px 0px 0px 0px #424242 !important;
+  font-weight: 600;
+  pointer-events: all;
+  background-color: #ffffff
+}
+
+.prev-next-toolbar{
+  background-color:#fafafa;
+  position: relative; 
+  height: 50px;
+}

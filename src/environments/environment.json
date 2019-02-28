@@ -1,0 +1,6 @@
+{
+  "API_BASE_URL": "_#_API_BASE_URL_#_",
+  "X_API_KEY": "_#_X_API_KEY_#_",
+  "OVID_BASE_URL": "_#_OVID_BASE_URL_#_",
+  "S3_BUCKET_BASE_URL": "_#_S3_BUCKET_BASE_URL_#_"
+}

@@ -1,0 +1,17 @@
+<h2 mat-dialog-title class="statement-header">Terms of Service</h2>
+<hr />
+<mat-dialog-content  class="attestation-text">
+  <div [innerHTML]="info"></div> 
+  <div>
+    <em class="is-required"><small>You must be accepting the above Terms of Service before you can proceed to use this application.*</small></em>
+  </div>
+  <hr>
+  <mat-dialog-actions class="flex-space-around">
+    <button mat-raised-button (click)="goToBack()" color="primary">
+      Disagree
+    </button>
+    <button mat-raised-button color="primary" (click)="goContinue()">
+      Agree & Continue
+    </button>
+  </mat-dialog-actions>
+</mat-dialog-content>

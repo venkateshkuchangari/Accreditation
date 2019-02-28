@@ -1,0 +1,33 @@
+
+<div style="margin:10px">
+<div  style="display:flex;justify-content:flex-end; margin-bottom: 5px">
+       <button *ngIf="showExportButton!='noShow'" (click)="onBtExport()" mat-stroked-button >Export to CSV</button>
+</div>
+   <div>
+    <ag-grid-angular
+    #agGrid    
+    id="myGrid"
+    [gridAutoHeight]="true"
+    class="ag-theme-material"
+    [rowData]="data"
+    [columnDefs]="columnDefs"
+    [enableSorting]="true"
+    [enableFilter]="true"
+    [debug]="false"
+    [rowSelection]="rowSelection"
+    [enableColResize]="true"
+    [enableRangeSelection]="true"
+    [animateRows]="true"
+    [paginationPageSize]="paginationPageSize"
+    [pagination]="true"
+    [suppressPaginationPanel]="false"
+    [suppressScrollOnNewData]="false"
+    (rowClicked)="onRowClick($event)"
+    (selectionChanged)="onSelectionChanged($event)"
+    (columnResized)="onColumnResized($event)"  
+    (paginationChanged)="onPaginationChanged($event)"
+    (gridReady)="onGridReady($event)"
+    [groupMultiAutoColumn]="true"
+    ></ag-grid-angular>
+  </div>
+ 

@@ -1,0 +1,23 @@
+.active-link {
+  box-shadow: 3px 0px 0px 0px #df223b !important;
+  font-weight: 600;
+}
+
+.space-between {
+  display: flex;
+  justify-content: space-between;
+  background-color: transparent;
+  margin-top: 10px;
+}
+
+mat-sidenav-content {
+  overflow: hidden;
+}
+
+mat-tab-body-content {
+  overflow: none !important;
+}
+
+.mat-tab-body #mat-tab-content-1-0 {
+  overflow: hidden;
+}

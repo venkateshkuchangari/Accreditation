@@ -1,0 +1,45 @@
+<div *ngIf="dataFetchedgB && dataFetchedoB && dataFetchedsB">
+  <div class="space-between">
+    <div class="tab-info-heading"> {{Instr}} </div>
+    <div>
+      <button mat-raised-button (click)='addInspectionHistory()' color="primary"> Add Inspection History </button>
+      <button mat-raised-button (click)='editInspectionHistory()' color="primary" [disabled]="selectedRow.length == 0">
+        Edit Inspection History </button>
+      <button mat-raised-button (click)="deleteInspectionHistory()" color="primary" [disabled]="selectedRow.length == 0">
+        Delete </button>
+    </div>
+  </div>
+  <mat-card class="card facility-level-card-size" style="width:375px">
+    <div class="tab-info-heading">{{residentMsg}}</div>
+    <br />
+    <hr>
+    <dynamic-grid *ngIf="residentInspection.length!=0" [data]="residentInspection" [columnDefs]="stateBoradColumnDefs"
+      paginationPageSize="5" showExportButton="noShow" (onSelection)="selectedRowEvent($event)" (gridReadyEvent)="onGridReady($event)"></dynamic-grid>
+    &nbsp;
+    <h3 *ngIf="residentInspection.length==0" class="no-record-text">
+      {{notFound}}
+    </h3>
+  </mat-card>
+  <mat-card class="card facility-level-card-size" style="width:475px">
+    <div class="tab-info-heading">{{otherAgenciesMsg}}</div>
+    <br />
+    <hr>
+    <dynamic-grid *ngIf="otherInspection.length!=0" [data]="otherInspection" [columnDefs]="otherBoardColumnDefs"
+      paginationPageSize="5" showExportButton="noShow" (onSelection)="selectedRowEventOther($event)" (gridReadyEvent)="onGridReadyOther($event)"></dynamic-grid>
+    &nbsp;
+    <h3 *ngIf="otherInspection.length==0" class="no-record-text">
+      {{notFound}}
+    </h3>
+  </mat-card>
+  <mat-card class="card facility-level-card-size" style="width:475px">
+    <div class="tab-info-heading">{{govtAgencyMsg}}</div>
+    <br />
+    <hr>
+    <dynamic-grid *ngIf="govtInspection.length!=0" [data]="govtInspection" [columnDefs]="govtBoardColumnDefs"
+      paginationPageSize="5" showExportButton="noShow" (onSelection)="selectedRowEventGovt($event)" (gridReadyEvent)="onGridReadyGovt($event)"></dynamic-grid>
+    &nbsp;
+    <h3 *ngIf="govtInspection.length==0" class="no-record-text">
+      {{notFound}}
+    </h3>
+  </mat-card>
+</div>

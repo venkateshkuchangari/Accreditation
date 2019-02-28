@@ -1,0 +1,36 @@
+<h2 mat-dialog-title class="statement-header">Application Attestation</h2>
+<hr />
+<mat-dialog-content  class="attestation-text">
+  <div [innerHTML]="info"></div>
+  <div class="table-label">
+    {{questionText }}
+  </div>
+  <div [formGroup]="form">
+    <mat-radio-group class="attestation-radio-group" formControlName="attestationQuestion">
+      <mat-radio-button class="attestation-radio-button" *ngFor="let data of testamentTypes" [value]="data.id">
+        <span class="wrap-mat-radio-label" innerHTML="{{data.text}}">
+         
+        </span>
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <br />
+  <div>
+    <mat-checkbox [disabled]="!form.valid" (change)="attestationCheckboxChanged($event)">
+      <span class="attestation-checkbox-label"> {{ checkboxText }}</span>
+    </mat-checkbox>
+  </div>
+  <div>
+    <em class="is-required"><small>You must be accepting the Application Attestation by selecting one of the
+        options before you can proceed to payment.*</small></em>
+  </div>
+  <hr>
+  <mat-dialog-actions class="flex-space-around">
+    <button mat-raised-button (click)="goToBack()" color="primary">
+      Disagree
+    </button>
+    <button mat-raised-button color="primary" [disabled]="!attestationCheckboxChecked || !form.valid" (click)="goContinue()">
+      Agree & Continue
+    </button>
+  </mat-dialog-actions>
+</mat-dialog-content>

@@ -1,0 +1,35 @@
+<div class="header-div">
+  <mat-toolbar class="space-between mat-toolbar-level2">
+    <span style="cursor: pointer;" routerLink="../../" queryParamsHandling="merge">
+      <mat-icon>reply</mat-icon>
+      Select Facility
+    </span>
+    <span>{{_toolbar_header}}
+    </span>
+    <span>e-Profile ID: {{eprofileId}}
+    </span>
+  </mat-toolbar>
+</div>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav opened mode="side" class="sidenav">
+    <mat-nav-list style="width: 98%; padding-top:30px;">
+      <ng-container *ngFor="let tab of tabs; let ind=index">
+        <a *ngIf="tabs_menu_access[ind]" mat-list-item class="facility-mat-item" [routerLink]="[tab.url]"
+          routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" queryParamsHandling="merge">
+          {{tab.name}}
+        </a>
+      </ng-container>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div style="display:flex">
+      <button mat-icon-button matTooltip="Click to Hide/Show" matTooltipPosition="before" [ngStyle]="{'background-color':(sidenav.opened)?'Transparent':'#cdd3f7'}"
+        (click)="sidenav.toggle()">
+        <mat-icon>{{(sidenav.opened)?"format_indent_decrease":"chevron_right"}}</mat-icon>
+      </button>
+      <div style="width:95%">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

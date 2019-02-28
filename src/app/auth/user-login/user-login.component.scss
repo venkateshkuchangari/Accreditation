@@ -1,0 +1,36 @@
+.header-image {
+    border-radius: 50%;
+    width:100px;
+    height:100px;
+    margin:10px;
+  }
+
+  .full-width {
+    width: 100%;
+  }
+    
+  .login-card-center {
+      display: flex;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+      padding-top: 5%;
+  }
+     .space-around{
+         display:flex;
+         justify-content: space-around
+     }
+     .buttons{
+         margin:8px;
+         padding: 5px;
+     }
+     .anchor{
+       text-decoration: none;
+       color:#df223b
+     }
+     .spinner{     
+      position:absolute;
+      left: 45%;     
+      z-index:100;
+     }
+     

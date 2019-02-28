@@ -1,0 +1,15 @@
+<div class="header-div">
+  <mat-toolbar class="space-between mat-toolbar-level2">
+    <span *ngIf="_toolbar_header=='Application Dashboard'" style="cursor: pointer;" routerLink="/dashboard">
+      <mat-icon>reply</mat-icon>Dashboard
+    </span>
+    <span *ngIf="_toolbar_header!='Application Dashboard'" style="cursor: pointer;" routerLink="/dashboard/myapplications">
+      <mat-icon>reply</mat-icon>Applications
+    </span>
+    <span>{{_toolbar_header}}</span>
+    <span *ngIf="_toolbar_header=='Application Dashboard'||_toolbar_header=='Choose Facilities'" style="width: 180px;">&nbsp;</span>
+    <span *ngIf="_toolbar_header!='Application Dashboard'&&_toolbar_header!='Choose Facilities'">Application
+      Id:{{applicationId}}</span>
+  </mat-toolbar>
+</div>
+<router-outlet></router-outlet>

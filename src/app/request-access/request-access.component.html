@@ -1,0 +1,18 @@
+<div class="header-div">
+  <div class="header-div">
+    <mat-toolbar class="space-between mat-toolbar-level2">
+      <span *ngIf="_toolbar_header=='e-Profile Requests'" style="cursor: pointer;" routerLink="../../">
+        <mat-icon>reply</mat-icon>
+        Dashboard
+      </span>
+      <span *ngIf="_toolbar_header=='Create Requests'" style="cursor: pointer;" routerLink="../request-access">
+        <mat-icon>reply</mat-icon>
+        Requests
+      </span>
+      <span>{{_toolbar_header}}
+      </span>
+      <span style="width: 180px;">&nbsp;</span>
+    </mat-toolbar>
+  </div>
+</div>
+<router-outlet></router-outlet>

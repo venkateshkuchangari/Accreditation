@@ -1,0 +1,412 @@
+<table *ngIf="dataLoaded" style="width: 100%">
+  <tr>
+    <td style="width:75%; padding: 10px">
+      <mat-vertical-stepper [linear]="true" #stepper>
+        <mat-step>
+          <ng-template matStepLabel>Review your cart Items</ng-template>
+          <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <h3>Cart Items ({{cartItems?.length}})</h3>
+              </mat-panel-title>
+              <mat-panel-description>
+                Click to view to order items
+                <div class="tab-info-heading">Total Fee:{{totalPrice |currency}}</div>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <ng-container *ngFor="let item of cartItems">
+              <mat-card style="width:95%">
+                <mat-card-title class="application-card-title cart-item-card-title">{{item.legalBusinessName}}
+                  {{' - ' + item.programType}} | <small>E-ProfileId: {{item.eProfileID}}</small></mat-card-title>
+                <mat-card-content style="width:100%">
+                  <table style="width:100%">
+                    <tr>
+                      <td style="width:20%">
+                        <div class="program-logo">
+                          <img width="110" height="65" src={{getImageUrl(item.programTypeId)}}>
+                        </div>
+                      </td>
+                      <td style="width:60%">
+                        <div>
+                          <table>
+                            <tr>
+                              <td class="table-label">
+                                Primary DBA:
+                              </td>
+                              <td>
+                                {{item?.primaryDBA||""|titlecase}}
+                              </td>
+                            </tr>
+                            <tr>
+                              <td class="table-label">
+                                Address:
+                              </td>
+                              <td>
+                                {{item?.addressLine1||"" |titlecase}} {{item?.addressLine2||"" |titlecase}},
+                                {{item?.city||"" |titlecase}},{{item?.stateName||"" |titlecase}},
+                                {{item?.countryName||"" |titlecase}}
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                      </td>
+                      <td style="width:10%">
+                        <div class="tab-info-heading">
+                          {{item.applicationFee | currency}}
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+                </mat-card-content>
+              </mat-card>
+              <br>
+            </ng-container>
+          </mat-expansion-panel>
+          <br>
+          <div class="center-content">
+            <button mat-raised-button color="primary" matStepperNext>Next</button>
+          </div>
+        </mat-step>
+        <mat-step [stepControl]="billingLocationForm">
+          <ng-template matStepLabel>Select Your billing location</ng-template>
+          <div>
+            <form [formGroup]="billingLocationForm">
+              <mat-form-field class="billing-dropdown" appearance="outline">
+                <mat-label>Select Billing Location</mat-label>
+                <mat-select placeholder="Select Billing Location" formControlName="billingLocationId" (selectionChange)="changeFacilitySelection($event.value)"
+                  [errorStateMatcher]="matcher" required>
+                  <mat-select-trigger> {{selectedFacility?.legalBusinessName}}
+                  </mat-select-trigger>
+                  <mat-option class="billing-option" *ngFor="let facility of billingLocations ;let ind=index" [ngStyle]="{'padding-left.px': 15+hierarchyList[ind]*20}"
+                    [value]="facility.organizationID">
+                    <b>{{facility.legalBusinessName}} | <small>E-ProfileId: {{facility.eProfileID}} | Primary DBA:
+                        {{facility.primaryDBA||""|titlecase}}</small></b>
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="billingLocationForm.get('billingLocationId').hasError('required')">
+                  Billing Location is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </form>
+            <br>
+            <table *ngIf="selectedFacility!=null" class="billing-location-table">
+              <tr>
+                <td class="table-label">
+                  Legal Business Name:
+                </td>
+                <td>
+                  {{selectedFacility?.legalBusinessName||""}}
+                </td>
+              </tr>
+              <tr>
+                <td class="table-label">
+                  Primary DBA:
+                </td>
+                <td>
+                  {{selectedFacility?.primaryDBA||""|titlecase}}
+                </td>
+              </tr>
+              <tr>
+                <td class="table-label">
+                  Address:
+                </td>
+                <td>
+                  {{selectedFacility?.addressLine1||"" |titlecase}} {{selectedFacility?.addressLine2||""|titlecase}}
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  &nbsp;
+                </td>
+                <td>
+                  {{selectedFacility?.city||""|titlecase}}, {{selectedFacility?.stateCode||""|uppercase}},
+                  {{selectedFacility?.countryCode||"" |uppercase}}
+                </td>
+
+              </tr>
+            </table>
+          </div>
+          <br>
+          <div class="flex-space-around">
+            <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+            <button mat-raised-button color="primary" matStepperNext>Next</button>
+          </div>
+        </mat-step>
+        <mat-step [stepControl]="paymentForm">
+          <ng-template matStepLabel>Pay & Submit Application</ng-template>
+          <mat-card class="payment-card">
+            <div *ngIf="!cartObject?.discountCodeUsage">
+              <form [formGroup]="paymentForm">
+                <table style="width:100%">
+                  <tr>
+                    <td colspan="3">
+                      <mat-form-field appearance="outline">
+                        <mat-label>First Name</mat-label>
+                        <input matInput formControlName="firstName" placeholder="First Name" required
+                          [errorStateMatcher]="matcher">
+                        <mat-error *ngIf="paymentForm.get('firstName').hasError('required')">
+                          First Name is <strong>required</strong>
+                        </mat-error>
+                        <mat-error *ngIf="paymentForm.get('firstName').hasError('pattern')">
+                          First Name is <strong>incorrect</strong>
+                        </mat-error>
+                      </mat-form-field>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Middle Name</mat-label>
+                        <input matInput formControlName="middleName" placeholder="Middle Name" [errorStateMatcher]="matcher">
+                        <mat-error *ngIf="paymentForm.get('middleName').hasError('pattern')">
+                          Middle Name is <strong>incorrect</strong>
+                        </mat-error>
+                      </mat-form-field>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Last Name</mat-label>
+                        <input matInput formControlName="lastName" placeholder="Last Name" required [errorStateMatcher]="matcher">
+                        <mat-error *ngIf="paymentForm.get('lastName').hasError('required')">
+                          Last Name is <strong>required</strong>
+                        </mat-error>
+                        <mat-error *ngIf="paymentForm.get('lastName').hasError('pattern')">
+                          Last Name is <strong>incorrect</strong>
+                        </mat-error>
+                      </mat-form-field>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Payment Type</mat-label>
+                        <mat-select (selectionChange)="paymentTypeChange($event.value)" formControlName="creditCardType"
+                          placeholder="Payment Type" required [errorStateMatcher]="matcher">
+                          <mat-option *ngFor="let type of paymentTypes;" [value]="type.id">{{type.text}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="paymentForm.get('creditCardType').hasError('required')">
+                          Payment Type is <strong>required</strong>
+                        </mat-error>
+                      </mat-form-field>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Card Number</mat-label>
+                        <input matInput formControlName="creditCardNumber" placeholder="Card Number" required
+                          [errorStateMatcher]="matcher">
+                        <img matSuffix [src]="ccImgUrl">
+                        <mat-error *ngIf="paymentForm.get('creditCardNumber').hasError('required')">
+                          Card Number is <strong>required</strong>
+                        </mat-error>
+                        <mat-error *ngIf="paymentForm.get('creditCardNumber').hasError('pattern')">
+                          Card Number <strong>not matching</strong> with selected <strong> Payment type</strong>
+                        </mat-error>
+                      </mat-form-field>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="1">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Expiration Month</mat-label>
+                        <mat-select formControlName="expirationMonth" placeholder="Expiration Month" required
+                          [errorStateMatcher]="matcher">
+                          <mat-option *ngFor="let month of calendarMonths;" [value]="month.id">{{month.text}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="paymentForm.get('expirationMonth').hasError('required')">
+                          Expiration Month is <strong>required</strong>
+                        </mat-error>
+                      </mat-form-field>
+                    </td>
+                    <td colspan="1">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Expiration Year</mat-label>
+                        <mat-select formControlName="expirationYear" placeholder="Expiration Year" required
+                          [errorStateMatcher]="matcher">
+                          <mat-option *ngFor="let year of calendarYears;" [value]="year">{{year}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="paymentForm.get('expirationYear').hasError('required')">
+                          Expiration Year is <strong>required</strong>
+                        </mat-error>
+                      </mat-form-field>
+                    </td>
+                    <td colspan="1">
+                      <mat-form-field appearance="outline">
+                        <mat-label>CVV/CVV2</mat-label>
+                        <input matInput formControlName="cardCvv" placeholder="CVV/CVV2" required [errorStateMatcher]="matcher">
+                        <mat-hint align="end"><a href="https://www.cvvnumber.com/cvv.html" target="_blank" style="text-decoration:underline">What
+                            is my CVV code?</a></mat-hint>
+                        <mat-error *ngIf="paymentForm.get('cardCvv').hasError('required')">
+                          CVV/CVV2 is <strong>required</strong>
+                        </mat-error>
+                        <mat-error *ngIf="paymentForm.get('cardCvv').hasError('pattern')">
+                          CVV/CVV2 is <strong>incorrect</strong>
+                        </mat-error>
+                      </mat-form-field>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Billing Phone Number</mat-label>
+                        <input matInput formControlName="cardPhoneNumber" placeholder="Billing Phone Number" required
+                          [errorStateMatcher]="matcher">
+                        <mat-error *ngIf="paymentForm.get('cardPhoneNumber').hasError('required')">
+                          Billing Phone Number is <strong>required</strong>
+                        </mat-error>
+                        <mat-error *ngIf="paymentForm.get('cardPhoneNumber').hasError('pattern')">
+                          Billing Phone Number is <strong>incorrect</strong>
+                        </mat-error>
+                      </mat-form-field>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Country</mat-label>
+                        <mat-select placeholder="Country" required formControlName="billingCountry" [errorStateMatcher]="matcher"
+                          (selectionChange)="getStates($event.value)">
+                          <mat-option *ngFor="let country of countryList;" [value]="country.countryId">{{country.countryName}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="paymentForm.get('billingCountry').hasError('required')">
+                          Country is <strong>required</strong>
+                        </mat-error>
+                      </mat-form-field>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Address Line 1</mat-label>
+                        <input matInput formControlName="billingAddress1" placeholder="Address Line 1" required
+                          [errorStateMatcher]="matcher">
+                        <mat-error *ngIf="paymentForm.get('billingAddress1').hasError('required')">
+                          Address Line 1 is <strong>required</strong>
+                        </mat-error>
+                        <mat-error *ngIf="paymentForm.get('billingAddress1').hasError('pattern')">
+                          Address Line 1 is <strong>incorrect</strong>
+                        </mat-error>
+                      </mat-form-field>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Address Line 2</mat-label>
+                        <input matInput formControlName="billingAddress2" placeholder="Address Line 2"
+                          [errorStateMatcher]="matcher">
+                      </mat-form-field>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">
+                      <mat-form-field appearance="outline">
+                        <mat-label>City</mat-label>
+                        <input matInput formControlName="billingCity" placeholder="City" required [errorStateMatcher]="matcher">
+                        <mat-error *ngIf="paymentForm.get('billingCity').hasError('required')">
+                          City is <strong>required</strong>
+                        </mat-error>
+                        <mat-error *ngIf="paymentForm.get('billingCity').hasError('pattern')">
+                          City is <strong>incorrect</strong>
+                        </mat-error>
+                      </mat-form-field>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">
+                      <mat-form-field appearance="outline">
+                        <mat-label>State</mat-label>
+                        <mat-select formControlName="billingState" placeholder="State" required [errorStateMatcher]="matcher">
+                          <mat-option *ngFor="let state of statesList" [value]="state.stateName">{{state.stateName}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="paymentForm.get('billingState').hasError('required')">
+                          State is <strong>required</strong>
+                        </mat-error>
+                      </mat-form-field>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Zip Code</mat-label>
+                        <input matInput formControlName="billingZipCode" placeholder="Zip Code" required
+                          [errorStateMatcher]="matcher">
+                        <mat-error *ngIf="paymentForm.get('billingZipCode').hasError('required')">
+                          Zip Code is <strong>required</strong>
+                        </mat-error>
+                        <mat-error *ngIf="paymentForm.get('billingZipCode').hasError('pattern')">
+                          Zip Code is <strong>incorrect</strong>
+                        </mat-error>
+                      </mat-form-field>
+                    </td>
+                  </tr>
+                </table>
+              </form>
+            </div>
+            <div class="no-record-text" *ngIf="cartObject?.discountCodeUsage">
+              Your payment code was applied to this order and you may now submit it. Please remember to send your check
+              payment. Your application will be processed when your payment clears.
+            </div>
+          </mat-card>
+          <br>
+          <div class="space-around">
+            <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+            <button *ngIf="!cartObject?.discountCodeUsage" mat-raised-button color="primary" [disabled]="!paymentForm.valid"
+              (click)="submitPayment()">Pay
+              & Submit</button>
+            <button *ngIf="cartObject?.discountCodeUsage" mat-raised-button color="primary" (click)="submitPayment()">Submit</button>
+          </div>
+        </mat-step>
+      </mat-vertical-stepper>
+    </td>
+    <td class="center-content" style="padding:10px">
+      <mat-card class="total-card">
+        <table>
+          <tr>
+            <td>
+              Items :
+            </td>
+            <td class="total-values-td">
+              {{cartItems.length ||""}}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Items Fee:
+            </td>
+            <td class="total-values-td">
+              {{totalPrice | currency}}
+            </td>
+          </tr>
+          <tr>
+            <td style="border-bottom: 1px solid #ddd;">
+              Discount:
+            </td>
+            <td class="total-values-td" style="border-bottom: 1px solid #ddd;">
+              {{(totalPrice-discountedPrice) | currency}}
+            </td>
+          </tr>
+          <tr>
+            <td class="table-label">
+              Order Total:
+            </td>
+            <td class="table-label total-values-td" style="color: #B12704!important;">
+              {{discountedPrice | currency}}
+            </td>
+          </tr>
+          <tr style="height: 40px;">
+            <td style="border-top: 1px solid #ddd;">
+              Codes applied:
+            </td>
+            <td style="border-top: 1px solid #ddd;">
+              {{(appliedPaymentCodes)? appliedPaymentCodes : '---' }}
+            </td>
+          </tr>
+        </table>
+      </mat-card>
+    </td>
+  </tr>
+</table>

@@ -1,0 +1,69 @@
+<div *ngIf="dataFetched">
+  <mat-card mat-elevation-z4 class="facility-level-card-size">
+    <div class="space-between" style="margin:10px">
+      <div class="tab-info-heading">
+        {{accrMsg}}
+      </div>
+      <div>
+        <button mat-raised-button color="primary" (click)='openAccreditationDetailsDialog()'>Add Accreditation</button>
+        <button [disabled]="this.selectedAccreditation.length==0" mat-raised-button color="primary" (click)='openAccreditationActionsDialog()'>Add
+          Accreditation Action</button>
+        <button mat-raised-button [disabled]="this.selectedAccreditation.length==0" color="primary" (click)='showAccreditationAction()'>Show
+          Accreditation Action</button>
+      </div>
+    </div>
+    <hr>
+    <div>
+      <dynamic-grid *ngIf="accrediationRowData.length!=0" [data]="accrediationRowData" [columnDefs]="columnDefs"
+        paginationPageSize="5" showExportButton="noShow" (onSelection)="selectedRowEvent($event)" (gridReadyEvent)="onGridReady($event)"></dynamic-grid>
+    </div>
+    <br>
+    <h3 *ngIf="accrediationRowData.length==0" class="no-record-text">
+      No Accreditations reported for this Facility
+    </h3>
+  </mat-card>
+
+  <br>
+  <mat-card mat-elevation-z4 class="facility-level-card-size" *ngIf="accrediationActionData.length!=0">
+    <div class="space-between" style="margin:10px">
+      <div class="space-between tab-info-heading" style="margin:10px">
+        {{accrActionsMsg}}
+      </div>
+      <div>
+        <button mat-icon-button (click)='closeAccreditationAction()'>
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    </div>
+    <hr>
+    <table>
+      <tr>
+        <td class="table-label">
+          Accreditation Action Type:
+        </td>
+        <td>
+          {{accrediationActionData.typeDescription}} {{(accrediationActionData.otherTypeDescription!=null)? "-":""}}
+          {{accrediationActionData.otherTypeDescription||""}}
+        </td>
+      </tr>
+      <tr>
+        <td class="table-label">
+          Accreditation Action Date:
+        </td>
+        <td>
+          {{accrediationActionData.date | date:'MM/dd/yyyy'}}
+        </td>
+      </tr>
+      <tr>
+        <td class="table-label">
+          Accreditation Action Explanation:
+        </td>
+        <td>
+          {{accrediationActionData.explanation}}
+        </td>
+      </tr>
+    </table>
+  </mat-card>
+  <div>&nbsp;</div>
+  <div>&nbsp;</div>
+</div>

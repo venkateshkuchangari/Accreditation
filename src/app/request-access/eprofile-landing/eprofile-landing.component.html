@@ -1,0 +1,83 @@
+<div class="space-end create-new-app-button">
+  <br />
+  <a *ngIf="access_request_e_profile" mat-raised-button color="primary" routerLink="../make-request">
+    Request New Facility e-Profile
+  </a>
+</div>
+<br>
+<div>
+  <mat-accordion>
+    <mat-expansion-panel hideToggle [disabled]="(submitted.length==0)?'true':'false'">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h3>Submitted ({{submitted.length}})</h3>
+        </mat-panel-title>
+        <mat-panel-description>
+          Click here to View Submitted requests
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <ng-container *ngFor="let app of submitted">
+        <mat-card class="application-card" mat-elevation-z8>
+          <div class="space-between">
+            <mat-card-title class="application-card-title">{{app.legalBusinessName || ""}}</mat-card-title>
+          </div>
+          <mat-card-content>
+            <table>
+              <tr>
+                <td class="table-label">Status:</td>
+                <td>{{app.applicationStatusTypeDescription||""}}</td>
+                <td class="table-label">Primary DBA:</td>
+                <td>{{app.primaryDBA||""}}</td>
+                <td class="table-label">Address:</td>
+                <td>
+                  {{app.organizationAddress1||""}}
+                  {{app.organizationAddress2||""}},
+                  {{app.organizationCity||""}},
+                  {{app.organizationState||""}},
+                  {{app.organizationZip||""}},
+                  {{app.countryName||""}}
+                </td>
+              </tr>
+            </table>
+          </mat-card-content>
+        </mat-card>
+      </ng-container>
+    </mat-expansion-panel>
+    <mat-expansion-panel hideToggle [disabled]="(inReview.length==0)?'true':'false'">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h3>In Review ({{inReview.length}})</h3>
+        </mat-panel-title>
+        <mat-panel-description>
+          Click here to View In Review requests
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <ng-container *ngFor="let app of inReview">
+        <mat-card class="application-card" mat-elevation-z8>
+          <div class="space-between">
+            <mat-card-title class="application-card-title">{{app.legalBusinessName || ""}}</mat-card-title>
+          </div>
+          <mat-card-content>
+            <table>
+              <tr>
+                <td class="table-label">Status :</td>
+                <td>{{app.applicationStatusTypeDescription||""}}</td>
+                <td class="table-label">Primary DBA :</td>
+                <td>{{app.primaryDBA||""}}</td>
+                <td class="table-label">Address :</td>
+                <td>
+                  {{app.organizationAddress1||""}}
+                  {{app.organizationAddress2||""}},
+                  {{app.organizationCity||""}},
+                  {{app.organizationState||""}},
+                  {{app.organizationZip||""}},
+                  {{app.countryName||""}}
+                </td>
+              </tr>
+            </table>
+          </mat-card-content>
+        </mat-card>
+      </ng-container>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

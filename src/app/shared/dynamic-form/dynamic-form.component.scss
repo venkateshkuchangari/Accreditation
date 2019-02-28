@@ -1,0 +1,49 @@
+.mat-radio-button {
+  padding-right: 40px !important;
+  padding-left: 10px;
+  margin-bottom: 10px;
+}
+
+.custom-radio-group {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.tablestyles {
+  width: 90%;
+  border-collapse: collapse;
+}
+
+tr {
+  height: 85px;
+
+  &:hover {
+    background-color: #f5f5f5;
+  }
+}
+
+.select-all-check {
+  margin: 10px;
+  padding: 10px;
+}
+
+td {
+  padding-top: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+mat-form-field,
+mat-radio-group {
+  width: 100%
+}
+
+.controlalign {
+  padding-left: 10px
+}
+
+input {
+  touch-action: all !important;
+  user-select: all !important;
+  -webkit-user-drag: all !important;
+  -webkit-tap-highlight-color: initial !important;
+}

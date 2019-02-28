@@ -1,0 +1,48 @@
+.space-between {
+  display: flex;
+  justify-content: space-between;
+  background-color: transparent;
+  margin-top: 10px;
+}
+
+button {
+  margin-left: 15px;
+}
+
+.total-card {
+  width: 235px;
+
+  // height: 250px;
+  table {
+    border-collapse: collapse;
+    width: 100%;
+
+    tr {
+      height: 30px;
+
+      td {
+        mat-form-field {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+.items-td {
+  width: 70%;
+  padding: 10px;
+  vertical-align: top;
+}
+
+.total-values-td{
+  text-align: end;
+}
+.cart-item-card-title {
+  text-align: center;
+  margin-bottom: 0px !important;
+}
+
+.program-logo {
+  width: 130px;
+}

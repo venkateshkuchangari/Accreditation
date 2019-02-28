@@ -1,0 +1,22 @@
+.space-between {
+    display: flex;
+   justify-content: space-between;
+   background-color: transparent;
+   margin-top: 10px;
+}
+
+.card {
+    width: 250px;
+    height:60px;
+    margin:15px;
+    float: left;
+  }
+
+  td{
+      padding:15px
+  }
+
+  .flex-center{
+    display: flex;
+    justify-content:center
+  }

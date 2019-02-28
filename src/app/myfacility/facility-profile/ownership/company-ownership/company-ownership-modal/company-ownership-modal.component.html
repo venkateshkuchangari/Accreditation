@@ -1,0 +1,197 @@
+<form [formGroup]="companyOwnerForm">
+  <div style="display:flex;justify-content:space-between">
+    <h3 mat-dialog-title>{{(data!=undefined)?"Edit Ownership Information":"Enter Ownership Information"}}</h3>
+    <button mat-icon-button (click)="onClose()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <mat-dialog-content class="mat-dialog-content-compOwner">
+    <table>
+      <tr>
+        <td class="table-label">
+          Is Parent Company?*
+        </td>
+        <td>
+          <mat-radio-group formControlName="isParentCompany" required class="rad-group">
+            <mat-radio-button class="rad-button" [value]=true>Yes</mat-radio-button>
+            <mat-radio-button class="rad-button" [value]=false>No</mat-radio-button>
+          </mat-radio-group>
+
+        </td>
+        <td>
+          <div>&nbsp;</div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <mat-select placeholder="Ownership Type" formControlName="ownershipTypeId" required (selectionChange)="selectedOwnershipType($event.value)"
+              [errorStateMatcher]="matcher">
+              <mat-option *ngFor="let item of ownerShipTypes" [value]="item.id">{{item.text}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="companyOwnerForm.get('ownershipTypeId').hasError('required')">
+              Ownership Type is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field *ngIf="showOwnerDescription">
+            <input matInput placeholder="Ownership Type Description" required formControlName="ownershipTypeOtherDesc"
+              [errorStateMatcher]="matcher">
+            <mat-error *ngIf="companyOwnerForm.get('ownershipTypeOtherDesc').hasError('required')">
+              Ownership Type Description is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="companyOwnerForm.get('ownershipTypeOtherDesc').hasError('pattern')">
+              Ownership Type Description is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <div>&nbsp;</div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <input matInput placeholder="Legal Business Name" required formControlName="businessName"
+              [errorStateMatcher]="matcher">
+            <mat-error *ngIf="companyOwnerForm.get('businessName').hasError('required')">
+              Legal Business Name is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="companyOwnerForm.get('businessName').hasError('pattern')">
+              Legal Business Name is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput placeholder="NABP Facility e-Profile ID" formControlName="eprofileId">
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput type="number" min="5" max="100" maxlength="3" placeholder="Percent Owned" formControlName="percentageOwned"
+              required [errorStateMatcher]="matcher">
+            <mat-error *ngIf="companyOwnerForm.get('percentageOwned').hasError('required')">
+              Percent Owned is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="companyOwnerForm.get('percentageOwned').hasError('max') || companyOwnerForm.get('percentageOwned').hasError('min')">
+              Percent owned should be <strong>between 5 to 100 </strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <mat-select placeholder="Country" required formControlName="countryId" [errorStateMatcher]="matcher"
+              (selectionChange)="getStates($event.value)">
+              <mat-option *ngFor="let country of countryList;" [value]="country.countryId">{{country.countryName}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="companyOwnerForm.get('countryId').hasError('required')">
+              Country is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput placeholder="Address Line 1" required formControlName="addressLine1" [errorStateMatcher]="matcher">
+            <mat-error *ngIf="companyOwnerForm.get('addressLine1').hasError('required')">
+              Address Line 1 is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="companyOwnerForm.get('addressLine1').hasError('pattern')">
+              Address Line 2 is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput placeholder="Address Line 2" formControlName="addressLine2">
+            <mat-hint align="end">Optional</mat-hint>
+            <mat-error *ngIf="companyOwnerForm.get('addressLine2').hasError('pattern')">
+              Address Line 2 is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <input matInput placeholder="City" required formControlName="city" [errorStateMatcher]="matcher">
+            <mat-error *ngIf="companyOwnerForm.get('city').hasError('required')">
+              City is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="companyOwnerForm.get('city').hasError('pattern')">
+              City is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <mat-select placeholder="State" formControlName="stateId" [errorStateMatcher]="matcher" required>
+              <mat-option *ngFor="let state of statesList" [value]="state.stateId">{{state.stateName}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="companyOwnerForm.get('stateId').hasError('required')">
+              State is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput #zip placeholder="Zipcode" required formControlName="zipCode" [errorStateMatcher]="matcher">
+            <mat-hint align="end">{{zip.value?.length || 0}}/5</mat-hint>
+            <mat-error *ngIf="companyOwnerForm.get('zipCode').hasError('required')">
+              Zipcode is <strong>Required</strong>
+            </mat-error>
+            <mat-error *ngIf=" companyOwnerForm.get('zipCode').hasError('pattern')">
+              Zipcode is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        <td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <input matInput type="tel" placeholder="Primary Phone" required formControlName="phoneNumber"
+              [errorStateMatcher]="matcher">
+            <mat-error *ngIf="companyOwnerForm.get('phoneNumber').hasError('required')">
+              Primary Phone is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="companyOwnerForm.get('phoneNumber').hasError('pattern')">
+              Primary Phone is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field style="width:40%">
+            <input matInput placeholder="Ext" formControlName="extension">
+            <mat-error *ngIf="companyOwnerForm.get('extension').hasError('pattern')">
+              Ext is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <div>&nbsp;</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="table-label">
+          Is Previous Owner?*
+        </td>
+        <td>
+          <mat-radio-group formControlName="isPreviousOwner" required class="rad-group">
+            <mat-radio-button class="rad-button" [value]=true>Yes</mat-radio-button>
+            <mat-radio-button class="rad-button" [value]=false>No</mat-radio-button>
+          </mat-radio-group>
+        </td>
+        <td>
+          <div>&nbsp;</div>
+        </td>
+      </tr>
+    </table>
+    <mat-dialog-actions class="flex-space-around">
+      <button mat-raised-button color="primary" (click)='onClear()'>Clear</button>
+      <button type="submit" [disabled]="!companyOwnerForm.valid" mat-raised-button color="primary" (click)="onSave()">{{(data!=undefined)?"Update":"Save"}}</button>
+    </mat-dialog-actions>
+  </mat-dialog-content>
+</form>

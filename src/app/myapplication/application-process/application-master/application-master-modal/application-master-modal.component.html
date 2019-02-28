@@ -1,0 +1,9 @@
+<h5 mat-dialog-title *ngIf="data.title">{{data.title}}</h5>
+<hr>
+<br>
+<mat-dialog-content>{{data.message}}</mat-dialog-content>
+<br>
+<mat-dialog-actions class="flex-space-around">
+  <button type="button" (click)="cancel()" [mat-dialog-close]="true" mat-raised-button>{{data.cancelButton}}</button>
+  <button type="button" (click)="save()" [mat-dialog-close]="true" mat-raised-button>{{data.okButton}}</button>
+</mat-dialog-actions>

@@ -1,0 +1,42 @@
+<mat-toolbar class="space-between mat-toolbar-level2">
+    <span style="cursor: pointer;" routerLink="/dashboard">
+      <mat-icon>reply</mat-icon>Dashboard
+    </span>
+    <span>
+      Notifications
+    </span>
+    <span></span>
+  </mat-toolbar>
+  <div>&nbsp;</div>
+  <div>&nbsp;</div>
+  <div>&nbsp;</div>
+  <div>&nbsp;</div>
+  <div>
+    <mat-accordion>
+      <ng-container *ngFor="let item of alertList;">
+        <mat-expansion-panel [expanded]="item.externalAuditMessageId == alertIdonRoutes">
+          <mat-expansion-panel-header>
+            <mat-panel-title class="table-label">
+              {{item.subject}}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <table style="width: 100%;">
+            <tr>
+              <td style="width:20%; padding-left: 10%;" class="table-label">
+                Rule Business Name
+              </td>
+              <td style="width:80%;">
+                <p>
+                  {{item.alertRuleBusinessName}}
+                </p>
+              </td>
+            </tr>
+          </table>
+        </mat-expansion-panel>
+      </ng-container>
+    </mat-accordion>
+  </div>
+  <div *ngIf="dataLoaded == false" style="color:brown;">
+    <h3>No Notifications Are Available.</h3>
+  </div>
+  

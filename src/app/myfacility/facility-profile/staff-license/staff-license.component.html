@@ -1,0 +1,20 @@
+<mat-card class="mat-elevation-z4 facility-level-card-size" *ngIf="dataLoaded">
+  <div class="space-between" style="margin:10px">
+    <div class="tab-info-heading">
+      Staff Licenses
+    </div>
+    <div>
+      <button mat-raised-button color="primary" (click)="searchAddIndividualLicense()">Search & Add Individual
+        License</button>
+      <button mat-raised-button color="primary" [disabled]="selectedRow.length==0"
+        (click)="deleteIndividualLicense()">Delete</button>
+    </div>
+  </div>
+  <hr>
+  <p class="user-info-text">For all Pharmacists-in-Charge and Designated Pharmacists, please include all applicable licenses/permits/registrations associated with the individual person's license, including, but not limited to, any pending, closed, inactive, and active licenses held by the individual, all nonresident licenses, etc. </p>
+  <div *ngIf="rowData.length==0">
+    <h3 style="color: rgb(155, 22, 22)">No Staff licenses for this Facility</h3>
+  </div>
+  <dynamic-grid *ngIf="rowData.length!=0" [data]="rowData" [columnDefs]="columnDefs" (onSelection)="handleEvent($event)"
+    paginationPageSize="7" (gridReadyEvent)="onStaffGridReady($event)"></dynamic-grid>
+</mat-card>

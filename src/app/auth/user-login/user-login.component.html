@@ -1,0 +1,35 @@
+<div class="login-card-center">
+  <mat-card class="card login-mat-card mat-elevation-z8">
+    <div class="div-hcenter"><img class="header-image" src="../../../assets/images/logo.jpeg" alt='logo'></div>
+    <mat-card-title>User Login</mat-card-title>
+    <mat-card-subtitle [ngStyle]="{'color':authResponse.responseColor}">
+      {{authResponse.responseText}}
+    </mat-card-subtitle>
+    <mat-card-content>
+      <form [formGroup]="loginForm">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="username" placeholder="User Name" required>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <input matInput formControlName="password" placeholder="Password" type="password" required (keydown.enter)="onLogin()">
+        </mat-form-field>
+      </form>     
+     </mat-card-content>
+     <mat-card-actions>
+      <div class="buttons">
+        <button class="full-width" type="submit" [disabled]="!loginForm.valid" mat-raised-button color="primary" (click)="onLogin()">Login</button>
+        </div>
+        <div class="buttons">
+        <button class="full-width" mat-raised-button color="primary" (click)="onCancel()">Cancel</button>
+      </div>
+      <div class="space-around buttons">
+        <a mat-button class="anchor">Forgot Username</a>      
+        <a  mat-button class="anchor" href="{{FORGOT_PASSWORD_URL}}">Forgot Password</a>
+        </div>
+        <div class="buttons">
+          <a  mat-button class="anchor" href="{{CREATE_ACCOUNT_URL}}">Create Login</a>
+        </div>
+    </mat-card-actions>
+
+  </mat-card>
+  </div>

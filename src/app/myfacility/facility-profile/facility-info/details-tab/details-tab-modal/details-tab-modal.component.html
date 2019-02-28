@@ -1,0 +1,176 @@
+<div style="display:flex;justify-content:space-between">
+  <h3 mat-dialog-title>{{data.description}}</h3>
+  <button mat-icon-button (click)="onClose()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<mat-dialog-content class="addFormContent mat-dialog-content-deatilsAddrTab" *ngIf="data.id===2">
+  <form [formGroup]='addressForm'>
+    <table>
+      <tr>
+        <td>
+          <mat-form-field>
+            <input matInput type="email" formControlName="email" [errorStateMatcher]="matcher" placeholder='Facility Email'
+              required>
+            <mat-error *ngIf="addressForm.get('email').hasError('email')">
+              Enter Valid Email
+            </mat-error>
+            <mat-error *ngIf="addressForm.get('phoneNumber').hasError('required')">
+              Facility Email is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput type="url" formControlName="website" [errorStateMatcher]="matcher" placeholder='Website'>
+            <mat-error *ngIf="addressForm.get('website').hasError('pattern')">
+              Website is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <input matInput type="tel" placeholder="Primary Phone" required formControlName="phoneNumber"
+              [errorStateMatcher]="matcher">
+            <mat-error *ngIf="addressForm.get('phoneNumber').hasError('required')">
+              Primary Phone is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="addressForm.get('phoneNumber').hasError('pattern')">
+              Primary Phone is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field style="width:40%">
+            <input matInput placeholder="Ext" formControlName="extension">
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <input matInput type="tel" placeholder="Fax Number" formControlName="faxNumber" [errorStateMatcher]="matcher">
+            <mat-error *ngIf="addressForm.get('faxNumber').hasError('pattern')">
+              Fax Number is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          &nbsp;
+        </td>
+      </tr>
+    </table>
+    <mat-dialog-actions class="flex-space-around">
+      <button mat-raised-button color="primary" (click)="onClear(addressForm)">Clear</button>
+      <button mat-raised-button color="primary" [disabled]="!addressForm.valid" [mat-dialog-close] cdkFocusInitial
+        (click)="onSave(addressForm)">Update</button>
+    </mat-dialog-actions>
+  </form>
+</mat-dialog-content>
+
+<!-- Modal content for Organization details -->
+
+<mat-dialog-content class="mat-dialog-content-deatilsTab" *ngIf="data.id===1">
+  <form [formGroup]='organizationForm'>
+    <table>
+      <tr>
+        <td>
+          <p mat-line><span class="table-label">Facility e-Profile Id: </span><span>{{data.org_details.eprofileId ||
+              ""}}</span></p>
+        </td>
+        <td>
+          <p mat-line><span class="table-label">Legal Business Name: </span><span>{{data.org_details.legalBusinessName
+              ||""}}</span></p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <input matInput formControlName="primaryDBA" placeholder="Primary DBA" required [errorStateMatcher]="matcher">
+            <mat-error *ngIf="organizationForm.get('primaryDBA').hasError('required')">
+              Primary DBA is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="organizationForm.get('primaryDBA').hasError('pattern')">
+              Primary DBA is <strong> Incorrect </strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          &nbsp;
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <chiplistinput #dbaInput [inputChips]="inputDbaChips" placeHolder="Other DBAs" (valuestoParent)="getDBAvaluesfromChild($event)"></chiplistinput>
+        </td>
+        <td>
+          <chiplistinput #fkaInput [inputChips]="inputFkaChips" placeHolder="Formerly Known As" (valuestoParent)="getFKAvaluesfromChild($event)"></chiplistinput>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <input matInput placeholder="Store Number" formControlName="storeNumber">
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput placeholder="FEIN Number" formControlName="fein" required>
+            <mat-hint align="end">
+              FEIN number should be 9 digits.
+            </mat-hint>
+            <mat-error *ngIf="organizationForm.get('fein').hasError('pattern')">
+              FEIN number should be <strong>9 digits.</strong>
+            </mat-error>
+            <mat-error *ngIf="organizationForm.get('fein').hasError('required')">
+              FEIN number is <strong>Required</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <input matInput placeholder="NPI Number" formControlName="npiNumber" required>
+            <mat-hint align="end">
+              NPI number should be 10 digits.
+            </mat-hint>
+            <mat-error *ngIf="organizationForm.get('npiNumber').hasError('pattern')">
+              NPI number should be <strong>10 digits.</strong>
+            </mat-error>
+            <mat-error *ngIf="organizationForm.get('npiNumber').hasError('required')">
+              NPI number is <strong>Required</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input #ncpdpInput id="ncpdp" matInput placeholder="NCPDP Number" formControlName="ncpdpNumber" required>
+            <mat-hint align="end">
+              NCPDP number should be 7 digits.
+            </mat-hint>
+            <mat-error *ngIf="organizationForm.get('ncpdpNumber').hasError('pattern')">
+              NCPDP number should be <strong>7 digits.</strong>
+            </mat-error>
+            <mat-error *ngIf="organizationForm.get('ncpdpNumber').hasError('required')">
+              NCPDP number is <strong>Required</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+    </table>
+    <mat-dialog-actions class="flex-space-around">
+      <button mat-raised-button color="primary" (click)="onClear(organizationForm)">Clear</button>
+      <button mat-raised-button color="primary" [disabled]="!organizationForm.valid" [mat-dialog-close] cdkFocusInitial
+        (click)="onSave(organizationForm)">Update</button>
+    </mat-dialog-actions>
+  </form>
+</mat-dialog-content>
+<mat-dialog-content *ngIf="data.id===0">
+  <hr>
+  <mat-list>
+    <mat-list-item *ngFor="let item of data.List"> {{item}} </mat-list-item>
+  </mat-list>
+</mat-dialog-content>

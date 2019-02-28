@@ -1,0 +1,20 @@
+<div class="outer">
+  <div class="middle">
+    <div *ngIf="dataLoaded" class="flexbox-container">
+      <ng-container *ngFor="let tile of tiles;let ind=index;">
+        <div *ngIf="tiles_access[ind]" class="flexbox-tiles">
+          <a [routerLink]="tile.url" [queryParams]="tile.queryParams">
+            <mat-card matTooltip={{tile.toolTipText}} class="cards-wrap-up tile-text tile-mat-card">
+              <span>
+                <mat-icon class="icon-alignment">
+                  {{tile.icon}}
+                </mat-icon>
+                {{tile.name}}
+              </span>
+            </mat-card>
+          </a>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

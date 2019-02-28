@@ -1,0 +1,264 @@
+// Large screen size - Laptop view standard
+
+@media screen and (min-width: 1280px) and (max-width:1440px) {
+
+  .sidenav-container-application-master {
+    min-height: 550px;
+    margin-top: 55px;
+  }
+
+  .application-master-exp-panel {
+    height: 40px !important;
+  }
+
+  .application-master-exp-panel:not {
+    height: 40px !important;
+  }
+
+  .application-router-outlet {
+    width: 95%;
+  }
+
+  .mat-datepicker-content .mat-calendar {
+    width: 235px !important;
+    height: 275px !important;
+  }
+
+  .mat-calendar-body-label{
+    padding-top: 3% !important;
+    padding-bottom: 3% !important; 
+  }
+
+  .mat-calendar-header {
+    padding: 1px 3px 0 3px !important;
+  }
+
+  .custom-text-font-style {
+    font-size: 14px;
+  }
+
+  .app-container {
+    min-height: 650px;
+  }
+
+  .flexbox-container {
+    margin-bottom: 100px;
+  }
+
+  .flexbox-tiles {
+    width: 200px;
+  }
+
+  .cards-wrap-up {
+    height: 170px;
+  }
+
+  .logo {
+    margin-top: 60px;
+    height: 150px;
+    width: 150px;
+  }
+
+  .tr-height-alignment {
+    height: 35px;
+  }
+
+  .mat-list-item {
+    font-size: 15px !important;
+  }
+
+  .create-new-app-button {
+    width: 98%;
+  }
+
+  .facility-mat-item {
+    height: 55px !important;
+
+    &:hover {
+      box-shadow: 3px 0px 0px 0px #424242 !important;
+    }
+  }
+
+  .mat-toolbar-level2 {
+    position: fixed;
+    left: 0;
+    z-index: 5;
+    margin-top: 5px !important;
+    background-color: white !important;
+    height: 40px !important;
+  }
+
+  .header-div {
+    height: 45px;
+    width: 100%
+  }
+
+  .ag-header-cell-text {
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .mat-button-wrapper {
+    font-size: 12px; 
+  }
+  .ag-font-style {
+    font-size: 12px
+  }
+
+  .main-router{
+    min-height: 82.2vh;
+}
+
+  .header-div {
+    font-size: 16px;
+  }
+
+  .header-icon{
+    font-size: 24px !important;
+  }
+  .mat-dialog-title {
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .tab-info-heading, .mat-step-label {
+    font-size: 15px;
+  }
+
+  p,
+  td {
+    font-size: 14px
+  }
+
+  .mat-toolbar {
+    font-size: 15px;
+  }
+
+  .mat-icon {
+    font-size: 18px
+  }
+
+  .tile-text {
+    font-size: 16px;
+  }
+
+  .sidenav-application-master {
+    width: 230px;
+  }
+
+  .sidenav {
+    width: 200px;
+  }
+
+  .application-card-title {
+    font-size: 14px !important;
+  }
+
+  .sidenav-container {
+    min-height: 500px;
+  }
+
+  h3 {
+    font-size: 1.0rem;
+  }
+
+  h4 {
+    font-size:0.8rem;
+  }
+
+  .mat-item {
+    height: 50px !important;
+    padding-left: 20px;
+  }
+
+  .mat-dialog-content-eprofile {
+    height: 445px;
+  }
+
+  .mat-dialog-content-usercontact {
+    height: 425px;
+  }
+
+  .mat-dialog-content-deatilsAddrTab {
+    height: 250px;
+  }
+
+  .mat-dialog-content-deatilsTab {
+    height: 400px;
+  }
+
+  .mat-dialog-content-busiInfoTab {
+    height: 580px;
+  }
+
+  .details-tab-mat-card {
+    margin-bottom: 5px;
+  }
+
+  .mat-dialog-content-pharmTab {
+    padding: 0 70px !important;
+    width: 950px;
+  }
+
+  .mat-dialog-content-inspection {
+    height: 230px;
+  }
+
+  .mat-dialog-content-accr-tab {
+    height: 350px;
+  }
+
+  .mat-dialog-content-accr-tab-exp {
+    height: 500px;
+  }
+
+  .mat-dialog-content-accr-action{
+    height:210px;
+}
+  .mat-dialog-content-contact {
+    height: 560px;
+  }
+
+  .mat-dialog-content-indivOwner {
+    height: 495px;
+  }
+
+  .mat-dialog-content-compOwner {
+    height: 475px;
+  }
+
+  .mat-dialog-content-facLicense {
+    height: 310px;
+  }
+
+  .mat-dialog-content-staffLic {
+    height: 230px;
+  }
+
+  .mat-dialog-content-staffLic-exp {
+    height: 480px;
+  }
+
+  .level-1-header-alignment {
+    height: 50px !important;
+  }
+
+  .level-1-footer-alignment {
+    height: 50px !important;
+  }
+
+  .no-record-text{
+    font-size: 12px;
+}
+  .mini-cards-wrap-up {
+    margin: 4px;
+    width: 50px;
+    height: 40px;
+    font-size:10px;
+  }
+
+  .mini-menu-panel {
+    width: 230px !important;
+  }
+
+}

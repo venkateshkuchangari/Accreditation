@@ -1,0 +1,228 @@
+<form [formGroup]="contactForm">
+  <div class="space-between">
+    <h3 mat-dialog-title>{{(data)?"Edit Contact Information":"Enter Contact Information"}}</h3>
+    <button mat-icon-button (click)="onClose()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <mat-dialog-content class="mat-dialog-content-contact">
+    <table>
+      <tr *ngIf="data==null">
+        <td>
+          <mat-checkbox [checked]="userContactCheckboxChecked" (change)="onUserContactCheckboxChanged($event)">Use my
+            account contact details</mat-checkbox>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <mat-select placeholder="Prefix" formControlName="PrefixTypeID">
+              <mat-option>--None--</mat-option>
+              <mat-option *ngFor="let prefix of prefixList" [value]="prefix.prefixTypeID">{{prefix.prefixTypeDescription}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput placeholder="First Name" required formControlName="FirstName" [errorStateMatcher]="matcher">
+            <mat-error *ngIf="contactForm.get('FirstName').hasError('required')">
+              First Name is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="contactForm.get('FirstName').hasError('pattern')">
+              First Name is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput placeholder="Middle Name" formControlName="MiddleName">
+            <mat-error *ngIf="contactForm.get('MiddleName').hasError('pattern')">
+              Middle Name is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <input matInput placeholder="Last Name" required formControlName="LastName" [errorStateMatcher]="matcher">
+            <mat-error *ngIf="contactForm.get('LastName').hasError('required')">
+              Last Name is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="contactForm.get('LastName').hasError('pattern')">
+              Last Name is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <mat-select placeholder="Suffix" formControlName="SuffixTypeID">
+              <mat-option>--None--</mat-option>
+              <mat-option *ngFor="let suffix of suffixList" [value]="suffix.suffixTypeID">{{suffix.suffixTypeDescription}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <mat-select placeholder="Gender" required formControlName="genderTypeId" [errorStateMatcher]="matcher">
+              <mat-option *ngFor="let gender of genderList" [value]='gender.id'>{{gender.text}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="contactForm.get('genderTypeId').hasError('required')">
+              Gender is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <input matInput placeholder="NABP e-Profile ID" formControlName="EprofileId">
+            <mat-error *ngIf="contactForm.get('EprofileId').hasError('pattern')">
+              NABP e-Profile ID is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput placeholder="E-Mail ID" formControlName="Email" required [errorStateMatcher]="matcher">
+            <mat-error *ngIf="contactForm.get('Email').hasError('required')">
+              E-Mail ID is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="contactForm.get('Email').hasError('email')">
+              E-Mail ID is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field *ngIf="data!=0">
+            <mat-select placeholder="Title" required formControlName="TitleId" [errorStateMatcher]="matcher">
+              <mat-option *ngFor="let title of titleList" [value]='title.id'>{{title.text}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="contactForm.get('TitleId').hasError('required')">
+              Title is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <mat-select placeholder="Country" required formControlName="CountryId" [errorStateMatcher]="matcher"
+              (selectionChange)="getStates($event.value)">
+              <mat-option *ngFor="let country of countryList;" [value]="country.countryId">{{country.countryName}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="contactForm.get('CountryId').hasError('required')">
+              Country is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput placeholder="Address Line 1" required formControlName="Address1" [errorStateMatcher]="matcher">
+            <mat-error *ngIf="contactForm.get('Address1').hasError('required')">
+              Address Line 1 is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="contactForm.get('Address1').hasError('pattern')">
+              Address Line 1 is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput placeholder="Address Line 2" formControlName="Address2">
+            <mat-hint align="end">Optional</mat-hint>
+            <mat-error *ngIf="contactForm.get('Address2').hasError('pattern')">
+              Address Line 2 is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <input matInput placeholder="City" required formControlName="City" [errorStateMatcher]="matcher">
+            <mat-error *ngIf="contactForm.get('City').hasError('required')">
+              City is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="contactForm.get('City').hasError('pattern')">
+              City is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <mat-select placeholder="State" formControlName="StateId" [errorStateMatcher]="matcher" required>
+              <mat-option *ngFor="let state of statesList" [value]="state.stateId">{{state.stateName}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="contactForm.get('StateId').hasError('required')">
+              State is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput #zip placeholder="Zipcode" required formControlName="ZipCode" [errorStateMatcher]="matcher">
+            <mat-hint align="end">{{zip.value?.length || 0}}/5</mat-hint>
+            <mat-error *ngIf="contactForm.get('ZipCode').hasError('required')">
+              Zipcode is <strong>Required</strong>
+            </mat-error>
+            <mat-error *ngIf=" contactForm.get('ZipCode').hasError('pattern')">
+              Zipcode is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        <td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <input matInput type="tel" placeholder="Primary Phone" required formControlName="PrimaryPhone"
+              [errorStateMatcher]="matcher">
+            <mat-error *ngIf="contactForm.get('PrimaryPhone').hasError('required')">
+              Primary Phone is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="contactForm.get('PrimaryPhone').hasError('pattern')">
+              Primary Phone is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field style="width:40%">
+            <input matInput placeholder="Ext" formControlName="PrimaryExtension">
+            <mat-error *ngIf="contactForm.get('PrimaryExtension').hasError('pattern')">
+              Ext is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <input matInput type="tel" placeholder="Secondary Phone" formControlName="SecondaryPhone">
+            <mat-error *ngIf="contactForm.get('SecondaryPhone').hasError('pattern')">
+              Secondary Phone is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field style="width:40%">
+            <input matInput placeholder="Ext" formControlName="SecondaryExtension">
+            <mat-error *ngIf="contactForm.get('SecondaryExtension').hasError('pattern')">
+              Ext is <strong>Incorrect</strong>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <div>&nbsp;</div>
+        </td>
+      </tr>
+    </table>
+    <mat-dialog-actions class="flex-space-around">
+      <td *ngIf="data!=0">
+        <mat-checkbox formControlName="IsPrimaryContact">Save as Primary Contact</mat-checkbox>
+      </td>
+      <button mat-raised-button color="primary" (click)='onClear()'>Clear</button>
+      <button type="submit" [disabled]="!contactForm.valid" mat-raised-button color="primary" (click)="onSave()">{{(data)?"Update":"Save"}}</button>
+    </mat-dialog-actions>
+  </mat-dialog-content>
+</form>

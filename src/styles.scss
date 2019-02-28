@@ -1,0 +1,450 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '~ag-grid/dist/styles/ag-grid.css';
+@import '~ag-grid/dist/styles/ag-theme-material.css';
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Roboto+Slab');
+@import 'assets/largeSizeViewStandard.scss';
+@import 'assets/mediumSizeViewStandard.scss';
+@import 'assets/smallSizeViewStandard.scss';
+.facility-level-card-size {
+    width: 95%;
+}
+
+.cell-wrap-text {
+    white-space: normal !important;
+}
+
+.user-info-text{
+    font-size: 12px;
+}
+.no-record-text {
+    text-align: justify;
+    color: rgba(168, 25, 25, 0.746);
+}
+
+.mat-progress-bar.mat-primary,
+.mat-tab-group.mat-primary .mat-ink-bar,
+.mat-raised-button.mat-primary {
+    background-color: #424242 !important;
+}
+
+.mat-progress-bar-fill::after,
+.mat-pseudo-checkbox-checked,
+.mat-checkbox-checked.mat-accent .mat-checkbox-background,
+.mat-radio-button.mat-accent .mat-radio-inner-circle {
+    background-color: #df223b !important;
+}
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+    border-color: #424242 !important;
+}
+
+mat-icon,
+.mat-form-field .mat-label,
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick,
+.mat-input-underline,
+.mat-placeholder {
+    color: #424242 !important;
+}
+
+.mat-primary .mat-option.mat-selected:not(.mat-option-disabled){
+    color: #df223b !important;
+}
+
+.mat-form-field {
+    .mat-input-element {
+        color: #424242;
+    }
+    .mat-form-field-label {
+        color: #424242;
+    }
+    .mat-form-field-underline {
+        background-color: #424242;
+    }
+    .mat-form-field-ripple {
+        background-color: #424242;
+    }
+}
+
+.mat-form-field.mat-focused {
+    .mat-form-field-label {
+        color: #424242;
+    }
+    .mat-form-field-ripple {
+        background-color: #424242;
+    }
+    .mat-form-field-required-marker {
+        color: #df223b;
+    }
+    .mat-input-element {
+        color: #424242;
+    }
+}
+
+.mat-form-field.mat-form-field-invalid {
+  .mat-input-element {
+      color: #df223b;
+  }
+  .mat-form-field-label {
+      color: #df223b;
+      .mat-form-field-required-marker {
+          color: #df223b;
+      }
+  }
+  .mat-form-field-ripple {
+      background-color: #df223b;
+}
+}
+
+.mat-progress-spinner circle,
+.mat-spinner circle {
+    stroke: #df223b !important;
+}
+
+.mat-raised-button[disabled] {
+    background-color: rgba(0, 0, 0, 0.144) !important;
+}
+
+.mat-progress-bar-buffer {
+    background-color: #eca9b2 !important;
+}
+
+.mat-progress-bar-background {
+    fill: #eca9b2 !important;
+}
+
+html,
+body {
+    margin: 4px 0px 0px 0px;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.app-footer {
+    background-color: #424242;
+    color: white !important;
+    td {
+        font-family: Arial, Helvetica, sans-serif !important;
+    }
+}
+
+.mat-tab-body-content {
+    overflow: hidden !important;
+}
+
+a {
+    text-decoration: none;
+    color: initial
+}
+
+.ag-header-cell {
+    color: rgba(0, 0, 0, 0.83);
+}
+
+.flex-space-around {
+    display: flex;
+    display: -ms-flexbox;
+    justify-content: space-around;
+}
+
+.mat-list-item-content {
+    font-family: Arial, Helvetica, sans-serif !important;
+    span {
+        font-family: Arial, Helvetica, sans-serif !important;
+    }
+}
+
+.ag-header-cell-text {
+    font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif !important;
+    font-weight: 600;
+}
+
+.ag-font-style {
+    font-size: 15px
+}
+
+.ag-header {
+    border-bottom: 2px solid #00000063;
+    border-top: 2px solid #00000063;
+    background: #f1f3f4
+}
+
+.ag-theme-material .ag-header-cell-resize::after {
+    border-right: #000000 1.5px solid
+}
+
+p,
+td,
+span,
+div {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.mat-dialog-title,
+.mat-form-field-label-wrapper,
+.custom-text-font-style,
+.table-label,
+.tile-text,
+.mat-button-wrapper,
+.mat-card-title,
+.no-record-text,
+.mat-tab-label-content,
+.attestation-text {
+    font-family: Arial, Helvetica, sans-serif !important;
+}
+
+.mat-input-element {
+    caret-color: #424242 !important;
+}
+
+.attestation-text {
+    font-size: 14px;
+    line-height: 1.5;
+    * {
+        font-family: Arial, Helvetica, sans-serif !important;
+    }
+}
+
+.mat-button-wrapper {
+    .mat-icon {
+        &:hover {
+            color: #df223b !important;
+        }
+    }
+}
+
+.mat-menu-item {
+    span {
+        font-family: Arial, Helvetica, sans-serif !important;
+    }
+}
+
+.mat-dialog-title {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+header {
+    span {
+        font-family: Arial, Helvetica, sans-serif !important;
+    }
+}
+
+.mat-tab-label-active {
+    color: #df223b !important;
+    font-weight: 600
+}
+
+mat-dialog-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+mat-dialog-content::-webkit-scrollbar-track {
+    border-radius: 3px;
+    -moz-box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3)
+}
+
+mat-dialog-content::-webkit-scrollbar-thumb {
+    background-color: #424242;
+    border-radius: 3px;
+    outline: 1px solid slategrey;
+}
+
+.table-label {
+    font-weight: 600;
+    color: rgb(110, 110, 110)
+}
+
+.is-required {
+    color: rgb(255, 0, 0);
+}
+
+.helpful-urls {
+    color: blue;
+    text-decoration: underline;
+}
+
+.heading {
+    font-weight: bold;
+}
+
+.mat-tab-body-content {
+    overflow: hidden !important;
+}
+
+:host {
+    background-color: red;
+}
+
+.mat-stroked-button {
+    border: 1px solid currentColor;
+    padding: 0 5px;
+    line-height: 25px;
+}
+
+.mat-item {
+    pointer-events: none;
+    opacity: 0.6;
+    &:hover {
+        box-shadow: 3px 0px 0px 0px #424242 !important;
+    }
+}
+
+.sidenav-container {
+    position: relative;
+}
+
+.application-card-title {
+    font-weight: 600 !important;
+}
+
+.space-around {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+
+.sidenav {
+    display: flex;
+    margin: 5px;
+    background: rgba(216, 216, 216, 0.5);
+}
+
+.sidenav-application-master {
+    display: flex;
+    margin: 5px;
+    background: rgba(216, 216, 216, 0.5);
+}
+
+.cls-white {
+    color: white !important;
+    text-decoration: none;
+    &:hover {
+        color: #df223b !important;
+    }
+}
+
+.mat-toolbar,
+.mat-toolbar h1,
+.mat-toolbar h2,
+.mat-toolbar h3,
+.mat-toolbar h4,
+.mat-toolbar h5,
+.mat-toolbar h6 {
+    font-family: Arial, Helvetica, sans-serif !important;
+}
+
+.cards-wrap-up {
+    justify-content: space-around;
+    margin: 2px;
+    text-align: center;
+    width: 180px;
+}
+
+.statement-header {
+    text-align: center;
+}
+
+.flexbox-tiles {
+    display: flex;
+    justify-content: space-around;
+    flex-flow: row wrap;
+    margin-top: 50px;
+}
+
+.flexbox-container {
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
+}
+
+.center-content {
+    display: flex;
+    justify-content: center;
+}
+
+.div-hcenter {
+    display: flex;
+    justify-content: center;
+}
+
+.space-between {
+    display: flex;
+    justify-content: space-between;
+    background-color: transparent;
+    margin-top: 10px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: Arial, Helvetica, sans-serif !important;
+}
+
+.mat-toolbar-level2 {
+    border-bottom: 3px solid #df223b;
+    span {
+        font-family: Arial, Helvetica, sans-serif !important;
+    }
+}
+
+.sidenav-container-application-master {
+    position: relative;
+}
+
+.login-mat-card {
+    max-width: 300px;
+    height: 575px;
+}
+
+.create-new-app-button {
+    padding-top: 10px;
+    padding-bottom: 5px;
+}
+
+.tab-info-heading,
+.mat-step-label {
+    font-family: Arial, Helvetica, sans-serif !important;
+    font-weight: 600
+}
+
+a {
+    text-decoration: none;
+    color: initial
+}
+
+a[disabled],
+a[disabled]:hover {
+    pointer-events: none;
+    color: #e1e1e1;
+}
+
+.mat-tab-body-content {
+    overflow: hidden !important;
+}
+
+.ag-theme-material {
+    background-color: #fff;
+    color: rgba(0, 0, 0, 0.87);
+}
+
+.ag-theme-material .ag-header {
+    color: rgba(0, 0, 0, 0.54);
+}
+
+.mini-menu-panel {
+    position: relative !important;
+    padding-bottom: 0 !important;
+    padding-top: 0 !important;
+}
+
+.mini-cards-wrap-up {
+    justify-content: space-around;
+    text-align: center;
+}

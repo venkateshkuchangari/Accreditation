@@ -1,0 +1,5 @@
+<dynamic-form 
+*ngIf="vppQuestions.length!=0"
+[inputQuestions]="vppQuestions"
+(answersToParent)="answerFromChild($event)"
+></dynamic-form>

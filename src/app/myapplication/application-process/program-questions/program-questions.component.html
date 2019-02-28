@@ -1,0 +1,30 @@
+<div [@.disabled]="true">
+  <mat-tab-group [selectedIndex]="tabIndexNumber">
+    <div *ngFor="let item of questionTabs">
+      <mat-tab label="{{item.programTypeName}}" [disabled]=true>
+        <ng-template matTabContent>
+          <div [ngSwitch]="item.programTypeId">
+            <div *ngSwitchCase="'107'">
+              <p>VIPPS</p>
+            </div>
+            <div *ngSwitchCase="'127'">
+              <p>VDIP</p>
+            </div>
+            <div *ngSwitchCase="'106'">
+              <p>VAWD</p>
+            </div>
+            <div *ngSwitchCase="'108'">
+              <p>DMEPOS</p>
+            </div>
+            <div *ngSwitchCase="'101'">
+              <p>DotPharmacy</p>
+            </div>
+            <div *ngSwitchCase="'134'">
+              <app-vpp-questions></app-vpp-questions>
+            </div>
+          </div>
+        </ng-template>
+      </mat-tab>
+    </div>
+  </mat-tab-group>
+</div>

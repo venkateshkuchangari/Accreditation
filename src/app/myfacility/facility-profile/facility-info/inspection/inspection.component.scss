@@ -1,0 +1,27 @@
+.headerStyles {
+    font-weight: bold;
+    font-size: 100%;
+    color: black;
+}
+
+.msgstyles{
+    color: red;
+}
+
+.space-between {
+    display: flex;
+   justify-content: space-between;
+   background-color: transparent;
+   margin-top: 10px;
+  
+}
+ 
+.card {   
+        margin: 20px;
+        height:450px;
+        display:inline-table;
+        }
+  
+  button{
+    margin-left: 15px;
+    }

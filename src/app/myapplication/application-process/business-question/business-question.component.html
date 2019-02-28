@@ -1,0 +1,4 @@
+<div>
+  <dynamic-form #businessquestions *ngIf="businessQuestions.length!=0" [inputQuestions]="businessQuestions"
+    (answersToParent)="answerFromChild($event)"></dynamic-form>
+</div>

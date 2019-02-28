@@ -1,0 +1,171 @@
+<div style="display:flex;justify-content:space-between">
+    <h3 mat-dialog-title>Enter Business Hours</h3>
+    <button mat-icon-button (click)="onClose(businessHoursForm)" [mat-dialog-close]="true">
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+<mat-dialog-content class="mat-dialog-content-busiInfoTab">
+
+    <form [formGroup]='businessHoursForm'>
+        <table>
+            <tr formGroupName="0">
+                <td>Sunday</td>
+                <td>
+                    <mat-checkbox (change)="onChange24Hours($event,'0')" formControlName="openAllDay">Open 24 Hours</mat-checkbox>
+                </td>
+                <td>
+                    <mat-checkbox (change)="onChangeClosed($event,'0')" formControlName="closedAllDay">Closed</mat-checkbox>
+                </td>
+                <td>
+                    <mat-form-field>
+                        <input matInput placeholder="Open Time" type="time" formControlName="openingTime" (focus)="focus($event,'0')"
+                            [errorStateMatcher]="matcher">
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field>
+                        <input matInput placeholder="Close Time" type="time" formControlName="closingTime" (focus)="focus($event,'0')"
+                            [errorStateMatcher]="matcher">
+                    </mat-form-field>
+                </td>
+            </tr>
+            <tr formGroupName="1">
+                <td>Monday</td>
+                <td>
+                    <mat-checkbox (change)="onChange24Hours($event,'1')" formControlName="openAllDay">Open 24 Hours</mat-checkbox>
+                </td>
+                <td>
+                    <mat-checkbox (change)="onChangeClosed($event,'1')" formControlName="closedAllDay">Closed</mat-checkbox>
+                </td>
+                <td>
+                    <mat-form-field>
+                        <input matInput formControlName="openingTime" matInput placeholder="Open Time" type="time"
+                            (focus)="focus($event,'1')" [errorStateMatcher]="matcher">
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field>
+                        <input matInput formControlName="closingTime" matInput placeholder="Close Time" type="time"
+                            (focus)="focus($event,'1')" [errorStateMatcher]="matcher">
+                    </mat-form-field>
+                </td>
+            </tr>
+            <tr formGroupName="2">
+                <td>Tuesday</td>
+                <td>
+                    <mat-checkbox (change)="onChange24Hours($event,'2')" formControlName="openAllDay">Open 24 Hours</mat-checkbox>
+                </td>
+                <td>
+                    <mat-checkbox (change)="onChangeClosed($event,'2')" formControlName="closedAllDay">Closed</mat-checkbox>
+                </td>
+                <td>
+                    <mat-form-field>
+                        <input matInput formControlName="openingTime" matInput placeholder="Open Time" type="time"
+                            (focus)="focus($event,'2')" [errorStateMatcher]="matcher">
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field>
+                        <input matInput formControlName="closingTime" matInput placeholder="Close Time" type="time"
+                            (focus)="focus($event,'2')" [errorStateMatcher]="matcher">
+                    </mat-form-field>
+                </td>
+            </tr>
+            <tr formGroupName="3">
+                <td>Wednesday</td>
+                <td>
+                    <mat-checkbox (change)="onChange24Hours($event,'3')" formControlName="openAllDay">Open 24 Hours</mat-checkbox>
+                </td>
+                <td>
+                    <mat-checkbox (change)="onChangeClosed($event,'3')" formControlName="closedAllDay">Closed</mat-checkbox>
+                </td>
+                <td>
+                    <mat-form-field>
+                        <input matInput formControlName="openingTime" placeholder="Open Time" type="time" (focus)="focus($event,'3')"
+                            [errorStateMatcher]="matcher">
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field>
+                        <input matInput formControlName="closingTime" placeholder="Close Time" type="time" (focus)="focus($event,'3')"
+                            [errorStateMatcher]="matcher">
+                    </mat-form-field>
+                </td>
+            </tr>
+            <tr formGroupName="4">
+                <td>Thursday</td>
+                <td>
+                    <mat-checkbox (change)="onChange24Hours($event,'4')" formControlName="openAllDay">Open 24 Hours</mat-checkbox>
+                </td>
+                <td>
+                    <mat-checkbox (change)="onChangeClosed($event,'4')" formControlName="closedAllDay">Closed</mat-checkbox>
+                </td>
+                <td>
+                    <mat-form-field>
+                        <input matInput formControlName="openingTime" placeholder="Open Time" type="time" (focus)="focus($event,'4')"
+                            [errorStateMatcher]="matcher">
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field>
+                        <input matInput formControlName="closingTime" placeholder="Close Time" type="time" (focus)="focus($event,'4')"
+                            [errorStateMatcher]="matcher">
+                    </mat-form-field>
+                </td>
+            </tr>
+            <tr formGroupName="5">
+                <td>Friday</td>
+                <td>
+                    <mat-checkbox (change)="onChange24Hours($event,'5')" formControlName="openAllDay">Open 24 Hours</mat-checkbox>
+                </td>
+                <td>
+                    <mat-checkbox (change)="onChangeClosed($event,'5')" formControlName="closedAllDay">Closed</mat-checkbox>
+                </td>
+                <td>
+                    <mat-form-field>
+                        <input matInput formControlName="openingTime" placeholder="Open Time" type="time" (focus)="focus($event,'5')"
+                            [errorStateMatcher]="matcher">
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field>
+                        <input matInput formControlName="closingTime" placeholder="Close Time" type="time" (focus)="focus($event,'5')"
+                            [errorStateMatcher]="matcher">
+                    </mat-form-field>
+                </td>
+            </tr>
+            <tr formGroupName="6">
+                <td>Saturday</td>
+                <td>
+                    <mat-checkbox (change)="onChange24Hours($event,'6')" formControlName="openAllDay">Open 24 Hours</mat-checkbox>
+                </td>
+                <td>
+                    <mat-checkbox (change)="onChangeClosed($event,'6')" formControlName="closedAllDay">Closed</mat-checkbox>
+                </td>
+                <td>
+                    <mat-form-field>
+                        <input matInput formControlName="openingTime" placeholder="Open Time" type="time" (focus)="focus($event,'6')"
+                            [errorStateMatcher]="matcher">
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field>
+                        <input matInput formControlName="closingTime" placeholder="Close Time" type="time" (focus)="focus($event,'6')"
+                            [errorStateMatcher]="matcher">
+                    </mat-form-field>
+                </td>
+            </tr>
+        </table>
+        <hr>
+        <p class="user-info-text">
+            Scheduled hours of operation should refer to the hours that your pharmacy is physically open and available for
+            an on-site inspection, including weekends if applicable. * Note: if an inspector arrives to inspect your
+            pharmacy during the hours of operation and your pharmacy is closed, or you are not able to perform compounding
+            activities (if applicable) you will be charged for a second inspection.
+        </p>
+        <mat-dialog-actions class="flex-space-around">
+            <button mat-raised-button color="primary" (click)="onClear(businessHoursForm)">Clear</button>
+            <button type="submit" mat-raised-button [disabled]="!businessHoursForm.valid" color="primary" (click)="onSave(businessHoursForm)">Update</button>
+        </mat-dialog-actions>
+    </form>
+</mat-dialog-content>

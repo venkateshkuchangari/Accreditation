@@ -1,0 +1,210 @@
+<form [formGroup]="accreditationForm">
+  <div class="space-between">
+    <h3 mat-dialog-title>Enter Accreditation Details</h3>
+    <button mat-icon-button (click)="onClose()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <mat-dialog-content [ngClass]="(!showAccreditationActionSection && showAccreditationSection)?'mat-dialog-content-accr-tab' : (showAccreditationActionSection && showAccreditationSection)?'mat-dialog-content-accr-tab-exp':'mat-dialog-content-accr-action'">
+    <div *ngIf="showAccreditationSection">
+      <table>
+        <tr>
+          <td>
+            <mat-form-field>
+              <input matInput placeholder="Business Name" formControlName="accreditationBusinessName" required
+                [errorStateMatcher]="matcher">
+              <mat-error *ngIf="accreditationForm.get('accreditationBusinessName').hasError('required')">
+                Business Name is <strong>required</strong>
+              </mat-error>
+              <mat-error *ngIf="accreditationForm.get('accreditationBusinessName').hasError('pattern')">
+                Business Name is <strong>Incorrect</strong>
+              </mat-error>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <mat-select required placeholder="Accreditation Agency" formControlName="accreditationAgencyTypeId"
+                (selectionChange)="selectedAgencyType($event.value)" [errorStateMatcher]="matcher">
+                <mat-option *ngFor="let item of accreditationAgencyTypes " matTooltip="{{item.text}}" [value]="item.id">{{item.text}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="accreditationForm.get('accreditationAgencyTypeId').hasError('required')">
+                Accreditation Agency is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field *ngIf="showAgencyName">
+              <input matInput placeholder="Please Specify if Other (Agency)" formControlName="accreditationAgencyTypeOtherDesc"
+                required [errorStateMatcher]="matcher">
+              <mat-error *ngIf="accreditationForm.get('accreditationAgencyTypeOtherDesc').hasError('required')">
+                Accreditation Agency Name is <strong>required</strong>
+              </mat-error>
+              <mat-error *ngIf="accreditationForm.get('accreditationAgencyTypeOtherDesc').hasError('pattern')">
+                Accreditation Agency Name is <strong>Incorrect</strong>
+              </mat-error>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field>
+              <mat-select required placeholder="Accreditation Type" formControlName="accreditationTypeId"
+                (selectionChange)="selectedAccreditationType($event.value)" [errorStateMatcher]="matcher">
+                <mat-option *ngFor="let item of accreditationTypes " matTooltip="{{item.text}}" [value]="item.id">{{item.text}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="accreditationForm.get('accreditationTypeId').hasError('required')">
+                Accreditation Type is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field *ngIf="showAccreditationName">
+              <input matInput placeholder="Please Specify if Other (Accreditation)" formControlName="accreditationTypeOtherDesc"
+                required [errorStateMatcher]="matcher">
+              <mat-error *ngIf="accreditationForm.get('accreditationTypeOtherDesc').hasError('required')">
+                Accreditation Type Desc is <strong>required</strong>
+              </mat-error>
+              <mat-error *ngIf="accreditationForm.get('accreditationTypeOtherDesc').hasError('pattern')">
+                Accreditation Type Desc is <strong>Incorrect</strong>
+              </mat-error>
+            </mat-form-field>
+          </td>
+          <td>
+            &nbsp;
+          </td>
+        </tr>
+        <tr>
+          <td class="table-label">
+            Is accreditation Full/Partial?<span class="is-required">*</span>
+          </td>
+          <td>
+            <mat-radio-group class="rad-group" formControlName="IsAccreditationFull">
+              <mat-radio-button class="rad-button" *ngFor="let radio of partialorFullRadioGroup" [value]="radio.id">
+                {{radio.text}}
+              </mat-radio-button>
+            </mat-radio-group>
+          </td>
+          <td>
+            &nbsp;
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field>
+              <input readonly matInput formControlName="accreditationDate" [matDatepicker]="frompicker" (dateChange)="validFromChange($event)"
+                [max]="maxDate" placeholder="Accreditation Date(Valid From)" required [errorStateMatcher]="matcher">
+              <mat-datepicker-toggle matSuffix [for]="frompicker"></mat-datepicker-toggle>
+              <mat-datepicker #frompicker></mat-datepicker>
+              <mat-error *ngIf="accreditationForm.get('accreditationDate').hasError('required')">
+                Accreditation Date(Valid From) is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <input readonly matInput formControlName="accreditationValidTo" [matDatepicker]="tillpicker" [min]="maxValidTillDate"
+                placeholder="Accreditation Date(Valid Till)" required [errorStateMatcher]="matcher">
+              <mat-datepicker-toggle matSuffix [for]="tillpicker"></mat-datepicker-toggle>
+              <mat-datepicker #tillpicker></mat-datepicker>
+              <mat-error *ngIf="accreditationForm.get('accreditationValidTo').hasError('required')">
+                Accreditation Date(Valid Till) is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <input readonly matInput formControlName="accreditationSurveyDate" [matDatepicker]="surveypicker"
+                placeholder="Survey Date" required [errorStateMatcher]="matcher">
+              <mat-datepicker-toggle matSuffix [for]="surveypicker"></mat-datepicker-toggle>
+              <mat-datepicker #surveypicker></mat-datepicker>
+              <mat-error *ngIf="accreditationForm.get('accreditationSurveyDate').hasError('required')">
+                Survey Date is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td class="table-label">
+            Is accreditation action taken?<span class="is-required">*</span>
+          </td>
+          <td>
+            <mat-radio-group class="rad-group" formControlName="isAccreditationActionExits">
+              <mat-radio-button class="rad-button" *ngFor="let radio of actionExistRadioGroup" [value]="radio.id"
+                (change)="accreditationActionExistsChange($event)">
+                {{radio.text}}
+              </mat-radio-button>
+            </mat-radio-group>
+          </td>
+          <td>
+            &nbsp;
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div *ngIf="showAccreditationActionSection">
+      <table>
+        <tr>
+          <td>
+            <mat-form-field>
+              <mat-select required placeholder="Accreditation Action" formControlName="accreditationActionTypeId"
+                (selectionChange)="selectedAccreditationActionType($event.value)" [errorStateMatcher]="matcher">
+                <mat-option *ngFor="let item of accreditationActionTypes " [value]="item.id">{{item.text}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="accreditationForm.get('accreditationActionTypeId').hasError('required')">
+                Accreditation Action is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field *ngIf="showAccreditationActionName">
+              <input matInput formControlName="AccreditationActionOtherTypeDesc" placeholder="Please Specify if Other (Accreditation Action)"
+                required [errorStateMatcher]="matcher">
+              <mat-error *ngIf="accreditationForm.get('AccreditationActionOtherTypeDesc').hasError('required')">
+                Accreditation Action Desc is <strong>required</strong>
+              </mat-error>
+              <mat-error *ngIf="accreditationForm.get('AccreditationActionOtherTypeDesc').hasError('pattern')">
+                Accreditation Action Desc is <strong>Incorrect</strong>
+              </mat-error>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <input readonly matInput formControlName="accreditationActionDate" [matDatepicker]="actionpicker"
+                placeholder="Action Date" required [errorStateMatcher]="matcher">
+              <mat-datepicker-toggle matSuffix [for]="actionpicker"></mat-datepicker-toggle>
+              <mat-datepicker #actionpicker></mat-datepicker>
+              <mat-error *ngIf="accreditationForm.get('accreditationActionDate').hasError('required')">
+                Action Date is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field>
+              <textarea maxlength="500" matInput formControlName="accreditationActionExplanation" placeholder="Explanation of Action"
+                required [errorStateMatcher]="matcher"></textarea>
+              <mat-hint align="end">Max. of 500 characters allowed</mat-hint>
+              <mat-error *ngIf="accreditationForm.get('accreditationActionExplanation').hasError('required')">
+                Explanation of Action is <strong>required</strong>
+              </mat-error>
+              <mat-error *ngIf="accreditationForm.get('accreditationActionExplanation').hasError('maxlength')">
+                Explanation of Action must be less than <strong>500 characters</strong>
+              </mat-error>
+            </mat-form-field>
+          </td>
+          <td>
+            &nbsp;
+          </td>
+          <td>
+            &nbsp;
+          </td>
+        </tr>
+      </table>
+    </div>
+    <mat-dialog-actions class="flex-space-around">
+      <button mat-raised-button color="primary" (click)='onClear()'>Clear</button>
+      <button [disabled]="!accreditationForm.valid" type="submit" mat-raised-button color="primary" (click)="onSave()">Save</button>
+    </mat-dialog-actions>
+  </mat-dialog-content>
+</form>

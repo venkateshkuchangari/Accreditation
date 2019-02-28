@@ -1,0 +1,27 @@
+.mat-checkbox{
+  width: 100%;
+}
+
+
+.reqmsg {
+  float: right;
+  width: 33.33333%;
+  text-align: right;
+  padding-left: 35%;
+  padding-right: 40px;
+  color: red;
+}
+
+table{
+  width:100%;
+  tr{
+      width:100%;
+      td{
+         padding-left: 15px;
+          mat-form-field{
+          width:100%;
+          }
+      }
+  }
+}
+
